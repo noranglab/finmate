@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0A0F1D;
+      color: #E8EAED;
+      line-height: 1.5;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff 0%, #a5a5a5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: #8B8F98;
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .icons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .main-card {
+      background: linear-gradient(145deg, #1E293B 0%, #1E3A34 100%);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .amount {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 16px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 16px;
+      border-radius: 12px;
+      flex: 1;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-label {
+      color: #8B8F98;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .value-green {
+      color: #34D399;
+    }
+
+    .value-yellow {
+      color: #FBBF24;
+    }
+
+    .section-title {
+      margin: 28px 0 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .project-info {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .project-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .project-details h3 {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .project-details p {
+      margin: 0;
+      color: #8B8F98;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .project-amount {
+      font-weight: 600;
+      color: #34D399;
+    }
+
+    .tax-menu {
+      background: linear-gradient(145deg, #1E293B 0%, #1E2A3B 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 28px 0;
+    }
+
+    .tax-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .tax-option {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tax-option:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .tax-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .tax-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #E8EAED;
+    }
+
+    .chat-input {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-input input {
+      background: none;
+      border: none;
+      color: #E8EAED;
+      width: 100%;
+      margin-right: 16px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .chat-input input::placeholder {
+      color: #8B8F98;
+    }
+
+    .chat-input input:focus {
+      outline: none;
+    }
+
+    .send-button {
+      background: #34D399;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #1A1F2E;
+    }
+
+    .send-button:hover {
+      transform: scale(1.05);
+      background: #3BE1A7;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="logo">FINMATE</div>
+      <div class="subtitle">프리랜서</div>
+    </div>
+    <div class="icons">
+      <span>🔔</span>
+      <span>⚙️</span>
+    </div>
+  </div>
+
+  <div class="main-card">
+    <div>이번 달 수입</div>
+    <div class="amount">₩5,850,000</div>
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-label">진행중</div>
+        <div class="stat-value value-green">3개 프로젝트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">예상수입</div>
+        <div class="stat-value value-green">₩7.2M</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">미수금</div>
+        <div class="stat-value value-yellow">₩2.4M</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">진행중인 프로젝트</div>
+
+  <div class="project-card">
+    <div class="project-info">
+      <div class="project-icon">📄</div>
+      <div class="project-details">
+        <h3>웹 개발 프로젝트</h3>
+        <p>A사</p>
+        <p>마감까지 7일</p>
+      </div>
+    </div>
+    <div class="project-amount">₩3.5M</div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-info">
+      <div class="project-icon">📄</div>
+      <div class="project-details">
+        <h3>디자인 작업</h3>
+        <p>B사</p>
+        <p>마감까지 14일</p>
+      </div>
+    </div>
+    <div class="project-amount">₩2.2M</div>
+  </div>
+
+  <div class="tax-menu">
+    <div class="section-title" style="margin: 0 0 8px 0">간편 세금 관리</div>
+    <div class="tax-options">
+      <div class="tax-option">
+        <div class="tax-icon">📊</div>
+        <div class="tax-label">매출 증빙</div>
+      </div>
+      <div class="tax-option">
+        <div class="tax-icon">🧾</div>
+        <div class="tax-label">경비 처리</div>
+      </div>
+      <div class="tax-option">
+        <div class="tax-icon">📅</div>
+        <div class="tax-label">신고 일정</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" placeholder="프로젝트 관리에 대해 물어보세요" />
+    <button class="send-button">➤</button>
+  </div>
+</body>
+</html>
