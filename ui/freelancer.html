@@ -239,6 +239,22 @@
     .project-card:hover {
       transform: translateY(-2px);
     }
+
+    .tax-option {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none; /* 링크 밑줄 제거 */
+      color: inherit; /* 링크 색상 유지 */
+      transition: transform 0.2s ease;
+    }
+
+    .tax-option:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.05);
+    }
   </style>
 </head>
 <body>
@@ -300,21 +316,26 @@
     <div class="project-amount">₩2.2M</div>
   </a>
 
-  <div class="tax-menu">
+  <<div class="tax-menu">
     <div class="section-title" style="margin: 0 0 8px 0">간편 세금 관리</div>
     <div class="tax-options">
-      <div class="tax-option">
+      <!-- 매출 증빙 링크 -->
+      <a href="/finmate/ui/fr_sales.html" class="tax-option">
         <div class="tax-icon">📊</div>
         <div class="tax-label">매출 증빙</div>
-      </div>
-      <div class="tax-option">
+      </a>
+      
+      <!-- 경비 처리 링크 -->
+      <a href="expense-management.html" class="tax-option">
         <div class="tax-icon">🧾</div>
         <div class="tax-label">경비 처리</div>
-      </div>
-      <div class="tax-option">
+      </a>
+      
+      <!-- 신고 일정 링크 -->
+      <a href="tax-calendar.html" class="tax-option">
         <div class="tax-icon">📅</div>
         <div class="tax-label">신고 일정</div>
-      </div>
+      </a>
     </div>
   </div>
 
