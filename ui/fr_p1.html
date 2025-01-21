@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0A0F1D;
+      color: #E8EAED;
+      line-height: 1.5;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+
+    .back-button {
+      background: rgba(255, 255, 255, 0.05);
+      border: none;
+      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #E8EAED;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .page-title {
+      font-size: clamp(20px, 5vw, 24px);
+      font-weight: 600;
+    }
+
+    .main-card {
+      background: linear-gradient(145deg, #1E293B 0%, #1E3A34 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .project-title {
+      font-size: clamp(18px, 4.5vw, 20px);
+      font-weight: 600;
+      color: #34D399;
+    }
+
+    .project-status {
+      background: rgba(52, 211, 153, 0.1);
+      color: #34D399;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .info-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .info-label {
+      color: #8B8F98;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .section-title {
+      margin: 24px 0 16px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .milestone-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .milestone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .milestone-title {
+      font-weight: 500;
+    }
+
+    .milestone-date {
+      color: #8B8F98;
+      font-size: 14px;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      margin-top: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #34D399;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .task-list {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .task-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .task-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #34D399;
+      border-radius: 6px;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .task-checked {
+      background: #34D399;
+    }
+
+    .task-details {
+      flex: 1;
+    }
+
+    .task-title {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .task-meta {
+      display: flex;
+      gap: 12px;
+      color: #8B8F98;
+      font-size: 13px;
+    }
+
+    .action-button {
+      background: #34D399;
+      color: #1A1F2E;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="back-button">←</button>
+    <div class="page-title">프로젝트 상세</div>
+  </div>
+
+  <div class="main-card">
+    <div class="project-header">
+      <div class="project-title">웹 개발 프로젝트</div>
+      <div class="project-status">진행중</div>
+    </div>
+    
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="info-label">클라이언트</div>
+        <div class="info-value">A사</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">계약금액</div>
+        <div class="info-value">₩3,500,000</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">계약일</div>
+        <div class="info-value">2025.01.14</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">마감일</div>
+        <div class="info-value">2025.01.28</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">마일스톤</div>
+  
+  <div class="milestone-card">
+    <div class="milestone-header">
+      <div class="milestone-title">디자인 시안 확정</div>
+      <div class="milestone-date">D-2</div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 80%"></div>
+    </div>
+  </div>
+
+  <div class="milestone-card">
+    <div class="milestone-header">
+      <div class="milestone-title">프론트엔드 개발</div>
+      <div class="milestone-date">D-5</div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 45%"></div>
+    </div>
+  </div>
+
+  <div class="section-title">세부 작업</div>
+
+  <div class="task-list">
+    <div class="task-item">
+      <div class="task-checkbox task-checked">✓</div>
+      <div class="task-details">
+        <div class="task-title">와이어프레임 작성</div>
+        <div class="task-meta">
+          <span>우선순위: 높음</span>
+          <span>완료</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-item">
+      <div class="task-checkbox"></div>
+      <div class="task-details">
+        <div class="task-title">메인 페이지 UI 개발</div>
+        <div class="task-meta">
+          <span>우선순위: 중간</span>
+          <span>진행중</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-item">
+      <div class="task-checkbox"></div>
+      <div class="task-details">
+        <div class="task-title">반응형 레이아웃 구현</div>
+        <div class="task-meta">
+          <span>우선순위: 중간</span>
+          <span>대기중</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="action-button">작업 추가하기</button>
+</body>
+</html>
