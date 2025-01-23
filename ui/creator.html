@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div class="chat-input">
+    <input type="text" placeholder="문의하실 내용을 입력하세요" />
+    <button class="send-button">➤</button>
+  </div>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #1A1022;
+      color: #E8EAED;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 0 8px;
+    }
+
+    .logo {
+      font-size: clamp(28px, 7vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff 0%, #E2E2E2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      color: #B76EFF;
+      font-size: clamp(16px, 4vw, 18px);
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .icons {
+      display: flex;
+      gap: 20px;
+      font-size: clamp(24px, 6vw, 28px);
+    }
+
+    .main-card {
+      background: linear-gradient(120deg, #4A2B63 0%, #7B3F9F 50%, #9B4ED1 100%);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 32px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(123, 63, 159, 0.15);
+    }
+
+    .income-label {
+      font-size: 18px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: -0.3px;
+    }
+
+    .amount {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 16px 0;
+      letter-spacing: -0.5px;
+      color: #fff;
+      font-feature-settings: "tnum";
+    }
+
+    .platform-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .platform-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 16px 12px;
+      border-radius: 16px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .platform-logo {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 8px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    .platform-name {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .platform-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    .section-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .section-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .section-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .section-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .ad-requests {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .ad-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .ad-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .ad-company {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .ad-status {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      background: rgba(183, 110, 255, 0.2);
+      color: #B76EFF;
+      font-weight: 500;
+    }
+
+    .chat-input {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-input input {
+      background: none;
+      border: none;
+      color: #E8EAED;
+      width: 100%;
+      margin-right: 12px;
+      font-size: clamp(14px, 3.8vw, 16px);
+    }
+
+    .chat-input input::placeholder {
+      color: #8B8F98;
+    }
+
+    .chat-input input:focus {
+      outline: none;
+    }
+
+    .send-button {
+      background: #B76EFF;
+      border: none;
+      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="logo">FINMATE</div>
+      <div class="subtitle">크리에이터</div>
+    </div>
+    <div class="icons">
+      <a href="notifications.html" style="color: inherit; text-decoration: none;">🔔</a>
+      <a href="settings.html" style="color: inherit; text-decoration: none;">⚙️</a>
+    </div>
+  </div>
+
+  <div class="main-card">
+    <div class="income-label">총 수입</div>
+    <div class="amount">₩12,450,000</div>
+    <div class="platform-stats">
+      <div class="platform-item">
+        <img src="/images/youtube-logo.png" alt="YouTube" class="platform-logo"> alt="YouTube" class="platform-logo">
+        <div class="platform-name">YouTube</div>
+        <div class="platform-value">₩5.2M</div>
+      </div>
+      <div class="platform-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='white' d='M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z'/%3E%3C/svg%3E" alt="Instagram" class="platform-logo">
+        <div class="platform-name">Instagram</div>
+        <div class="platform-value">₩3.1M</div>
+      </div>
+      <div class="platform-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='white' d='M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z'/%3E%3C/svg%3E" alt="TikTok" class="platform-logo">
+        <div class="platform-name">TikTok</div>
+        <div class="platform-value">₩2.8M</div>
+      </div>
+      <div class="platform-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M391.17,103.47H352.54v109.7h38.63ZM285,103H246.37V212.75H285ZM120.83,0,24.31,91.42V420.58H140.14V512l96.53-91.42h77.25L487.69,256V0ZM449.07,237.75l-77.22,73.12H294.61l-67.6,64v-64H140.14V36.58H449.07Z'/%3E%3C/svg%3E" alt="Twitch" class="platform-logo">
+        <div class="platform-name">Twitch</div>
+        <div class="platform-value">₩1.3M</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-cards">
+    <a href="income_analysis.html" class="section-card">
+      <div class="section-icon">📊</div>
+      <div>수익 분석</div>
+    </a>
+    <a href="expense_management.html" class="section-card">
+      <div class="section-icon">💰</div>
+      <div>경비 관리</div>
+    </a>
+    <a href="tax_report.html" class="section-card">
+      <div class="section-icon">📑</div>
+      <div>세금 신고</div>
+    </a>
+    <a href="performance_metrics.html" class="section-card">
+      <div class="section-icon">📈</div>
+      <div>성과 분석</div>
+    </a>
+  </div>
+
+  <div class="ad-requests">
+    <h3 style="margin-bottom: 20px; font-size: 20px; letter-spacing: -0.5px;">광고 문의</h3>
+    <a href="ad_details_a.html" class="ad-item">
+      <div class="ad-company">A 브랜드</div>
+      <div class="ad-status">검토중</div>
+    </a>
+    <a href="ad_details_b.html" class="ad-item">
+      <div class="ad-company">B 기업</div>
+      <div class="ad-status">계약 대기</div>
+    </a>
+  </div>
+
+  <div style="height: 80px;"></div>
