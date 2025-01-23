@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0A0F1D;
+      color: #E8EAED;
+      line-height: 1.5;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+
+    .back-button {
+      background: rgba(255, 255, 255, 0.05);
+      border: none;
+      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #E8EAED;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .page-title {
+      font-size: clamp(20px, 5vw, 24px);
+      font-weight: 600;
+    }
+
+    .summary-card {
+      background: linear-gradient(145deg, #1E293B 0%, #1E3A34 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .balance-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .balance-title {
+      color: #8B8F98;
+      font-size: 14px;
+    }
+
+    .balance-amount {
+      font-size: 28px;
+      font-weight: 600;
+      color: #34D399;
+    }
+
+    .expense-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .expense-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .expense-label {
+      color: #8B8F98;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .expense-value {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .section-title {
+      margin: 24px 0 16px;
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .date-filter {
+      font-size: 14px;
+      color: #34D399;
+      font-weight: 500;
+    }
+
+    .expense-list {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .expense-entry {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .expense-entry:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .expense-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(52, 211, 153, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: #34D399;
+      font-size: 20px;
+    }
+
+    .expense-details {
+      flex: 1;
+    }
+
+    .expense-category {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .expense-meta {
+      display: flex;
+      gap: 12px;
+      color: #8B8F98;
+      font-size: 13px;
+    }
+
+    .expense-amount {
+      font-size: 15px;
+      font-weight: 500;
+      color: #34D399;
+    }
+
+    .action-button {
+      background: #34D399;
+      color: #1A1F2E;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 24px;
+    }
+
+    .tag {
+      background: rgba(52, 211, 153, 0.1);
+      color: #34D399;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="back-button">←</button>
+    <div class="page-title">경비 관리</div>
+  </div>
+
+  <div class="summary-card">
+    <div class="balance-header">
+      <div class="balance-title">이번 달 지출</div>
+      <div class="balance-amount">₩1,250,000</div>
+    </div>
+    
+    <div class="expense-grid">
+      <div class="expense-item">
+        <div class="expense-label">프로젝트 경비</div>
+        <div class="expense-value">₩850,000</div>
+      </div>
+      <div class="expense-item">
+        <div class="expense-label">운영비</div>
+        <div class="expense-value">₩400,000</div>
+      </div>
+      <div class="expense-item">
+        <div class="expense-label">세금 공제</div>
+        <div class="expense-value">₩125,000</div>
+      </div>
+      <div class="expense-item">
+        <div class="expense-label">잔여 예산</div>
+        <div class="expense-value">₩2,250,000</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <span>최근 지출</span>
+    <span class="date-filter">1월</span>
+  </div>
+
+  <div class="expense-list">
+    <div class="expense-entry">
+      <div class="expense-icon">💻</div>
+      <div class="expense-details">
+        <div class="expense-category">소프트웨어 라이센스</div>
+        <div class="expense-meta">
+          <span>Adobe CC</span>
+          <span class="tag">공제가능</span>
+        </div>
+      </div>
+      <div class="expense-amount">₩350,000</div>
+    </div>
+
+    <div class="expense-entry">
+      <div class="expense-icon">🏢</div>
+      <div class="expense-details">
+        <div class="expense-category">공유 오피스</div>
+        <div class="expense-meta">
+          <span>1월 임대료</span>
+          <span class="tag">공제가능</span>
+        </div>
+      </div>
+      <div class="expense-amount">₩500,000</div>
+    </div>
+
+    <div class="expense-entry">
+      <div class="expense-icon">📱</div>
+      <div class="expense-details">
+        <div class="expense-category">통신비</div>
+        <div class="expense-meta">
+          <span>업무용</span>
+          <span class="tag">공제가능</span>
+        </div>
+      </div>
+      <div class="expense-amount">₩85,000</div>
+    </div>
+  </div>
+
+  <button class="action-button">지출 추가하기</button>
+</body>
+</html>
