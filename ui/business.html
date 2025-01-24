@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #1A1D2D;
+      color: #E8EAED;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .logo {
+      font-size: clamp(24px, 6vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #4FD1C5 0%, #2C7A7B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: #9CA3AF;
+      margin-top: 4px;
+      font-size: clamp(14px, 3.5vw, 16px);
+      font-weight: 500;
+    }
+
+    .icons {
+      display: flex;
+      gap: 16px;
+      font-size: clamp(20px, 5vw, 24px);
+    }
+
+    .main-card {
+      background: linear-gradient(145deg, #2C3E50 0%, #2D3748 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .amount {
+      font-size: clamp(28px, 7vw, 32px);
+      font-weight: 700;
+      margin: 12px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    .section-title {
+      margin: 24px 0 16px 0;
+      font-size: clamp(16px, 4.5vw, 18px);
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .support-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .support-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .support-title {
+      font-weight: 600;
+    }
+
+    .support-badge {
+      background: #4FD1C5;
+      color: #1A1D2D;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .support-details {
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .action-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .action-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .action-label {
+      font-size: 14px;
+      color: #9CA3AF;
+    }
+
+    .employee-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .employee-info {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .employee-avatar {
+      width: 40px;
+      height: 40px;
+      background: #4FD1C5;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #1A1D2D;
+    }
+
+    .employee-details h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .employee-details p {
+      margin: 4px 0 0 0;
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    .chat-input {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-input input {
+      background: none;
+      border: none;
+      color: #E8EAED;
+      width: 100%;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+
+    .chat-input input::placeholder {
+      color: #9CA3AF;
+    }
+
+    .chat-input input:focus {
+      outline: none;
+    }
+
+    .send-button {
+      background: #4FD1C5;
+      border: none;
+      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #1A1D2D;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="logo">FINMATE</div>
+      <div class="subtitle">소상공인</div>
+    </div>
+    <div class="icons">
+      <span>🔔</span>
+      <span>⚙️</span>
+    </div>
+  </div>
+
+  <div class="main-card">
+    <div>이번 달 매출</div>
+    <div class="amount">₩24,850,000</div>
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-value">₩850K</div>
+        <div class="stat-label">일 평균</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color: #4FD1C5">+12.5%</div>
+        <div class="stat-label">전월 대비</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">₩4.2M</div>
+        <div class="stat-label">인건비</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <span>신청 가능한 지원금</span>
+    <span style="color: #4FD1C5; font-size: 14px;">전체보기</span>
+  </div>
+
+  <div class="support-card">
+    <div class="support-header">
+      <div class="support-title">소상공인 경영안정자금</div>
+      <div class="support-badge">D-7</div>
+    </div>
+    <div class="support-details">
+      최대 5천만원 지원 • 연 2.5% 금리<br>
+      신청마감: 2024.02.15
+    </div>
+  </div>
+
+  <div class="support-card">
+    <div class="support-header">
+      <div class="support-title">디지털 전환 지원사업</div>
+      <div class="support-badge">신규</div>
+    </div>
+    <div class="support-details">
+      최대 400만원 지원<br>
+      신청마감: 2024.03.01
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <div class="action-item">
+      <div class="action-icon">📊</div>
+      <div class="action-label">매출 분석</div>
+    </div>
+    <div class="action-item">
+      <div class="action-icon">🧾</div>
+      <div class="action-label">경비 처리</div>
+    </div>
+    <div class="action-item">
+      <div class="action-icon">💰</div>
+      <div class="action-label">세금 신고</div>
+    </div>
+    <div class="action-item">
+      <div class="action-icon">👥</div>
+      <div class="action-label">알바 관리</div>
+    </div>
+  </div>
+
+  <div class="section-title">알바생 근무 현황</div>
+
+  <div class="employee-card">
+    <div class="employee-info">
+      <div class="employee-avatar">김</div>
+      <div class="employee-details">
+        <h3>김민수</h3>
+        <p>주 20시간 • 오후 근무</p>
+      </div>
+    </div>
+    <div style="color: #4FD1C5">출근중</div>
+  </div>
+
+  <div class="employee-card">
+    <div class="employee-info">
+      <div class="employee-avatar">이</div>
+      <div class="employee-details">
+        <h3>이지은</h3>
+        <p>주 15시간 • 주말 근무</p>
+      </div>
+    </div>
+    <div style="color: #9CA3AF">퇴근</div>
+  </div>
+
+  <div style="height: 80px;"></div>
+
+  <div class="chat-input">
+    <input type="text" placeholder="매장 운영에 대해 물어보세요" />
+    <button class="send-button">➤</button>
+  </div>
+</body>
+</html>
