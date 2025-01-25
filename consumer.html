@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #111827;
+      color: #E8EAED;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .logo {
+      font-size: clamp(24px, 6vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: #9CA3AF;
+      margin-top: 4px;
+      font-size: clamp(14px, 3.5vw, 16px);
+      font-weight: 500;
+    }
+
+    .icons {
+      display: flex;
+      gap: 16px;
+      font-size: clamp(20px, 5vw, 24px);
+    }
+
+    .balance-card {
+      background: linear-gradient(145deg, #1E40AF 0%, #1E3A8A 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .balance-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .balance-title {
+      color: #93C5FD;
+      font-size: 14px;
+    }
+
+    .balance-amount {
+      font-size: clamp(28px, 7vw, 32px);
+      font-weight: 700;
+      margin: 8px 0 16px 0;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .portfolio-item {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .portfolio-label {
+      color: #93C5FD;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .portfolio-value {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .insight-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .insight-value {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .insight-label {
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .action-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .action-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .action-label {
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+
+    .section-title {
+      margin: 24px 0 16px;
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .transaction-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .transaction-info {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .transaction-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .transaction-details h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .transaction-details p {
+      margin: 4px 0 0;
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    .expense-amount {
+      color: #EF4444;
+      font-weight: 600;
+    }
+
+    .income-amount {
+      color: #10B981;
+      font-weight: 600;
+    }
+
+    .investment-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .investment-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .investment-name {
+      font-weight: 600;
+    }
+
+    .investment-return {
+      color: #10B981;
+      font-weight: 600;
+    }
+
+    .investment-details {
+      color: #9CA3AF;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .chat-input {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-input input {
+      background: none;
+      border: none;
+      color: #E8EAED;
+      width: 100%;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+
+    .chat-input input::placeholder {
+      color: #9CA3AF;
+    }
+
+    .chat-input input:focus {
+      outline: none;
+    }
+
+    .send-button {
+      background: #3B82F6;
+      border: none;
+      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="logo">FINMATE</div>
+      <div class="subtitle">개인 자산관리</div>
+    </div>
+    <div class="icons">
+      <span>🔔</span>
+      <span>⚙️</span>
+    </div>
+  </div>
+
+  <div class="balance-card">
+    <div class="balance-header">
+      <div class="balance-title">총 자산</div>
+      <div style="color: #93C5FD">실시간</div>
+    </div>
+    <div class="balance-amount">₩45,280,000</div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <div class="portfolio-label">현금성 자산</div>
+        <div class="portfolio-value">₩12,500,000</div>
+      </div>
+      <div class="portfolio-item">
+        <div class="portfolio-label">주식</div>
+        <div class="portfolio-value">₩15,600,000</div>
+      </div>
+      <div class="portfolio-item">
+        <div class="portfolio-label">펀드</div>
+        <div class="portfolio-value">₩8,680,000</div>
+      </div>
+      <div class="portfolio-item">
+        <div class="portfolio-label">채권</div>
+        <div class="portfolio-value">₩8,500,000</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-value" style="color: #EF4444">₩2.8M</div>
+      <div class="insight-label">이번 달 지출</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-value" style="color: #10B981">₩4.2M</div>
+      <div class="insight-label">이번 달 수입</div>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <a href="transfer.html" class="action-item">
+      <div class="action-icon">💸</div>
+      <div class="action-label">이체</div>
+    </a>
+    <a href="income.html" class="action-item">
+      <div class="action-icon">💰</div>
+      <div class="action-label">수입</div>
+    </a>
+    <a href="expense.html" class="action-item">
+      <div class="action-icon">💳</div>
+      <div class="action-label">지출</div>
+    </a>
+  </div>
+
+  <div class="section-title">
+    <span>최근 거래내역</span>
+    <span style="color: #3B82F6; font-size: 14px;">전체보기</span>
+  </div>
+
+  <div class="transaction-card">
+    <div class="transaction-info">
+      <div class="transaction-icon">🍜</div>
+      <div class="transaction-details">
+        <h3>점심식사</h3>
+        <p>오늘 12:30</p>
+      </div>
+    </div>
+    <div class="expense-amount">-₩12,000</div>
+  </div>
+
+  <div class="transaction-card">
+    <div class="transaction-info">
+      <div class="transaction-icon">💼</div>
+      <div class="transaction-details">
+        <h3>급여</h3>
+        <p>2024.01.25</p>
+      </div>
+    </div>
+    <div class="income-amount">+₩3,200,000</div>
+  </div>
+
+  <div class="section-title">
+    <span>투자 현황</span>
+    <span style="color: #3B82F6; font-size: 14px;">전체보기</span>
+  </div>
+
+  <div class="investment-card">
+    <div class="investment-header">
+      <div class="investment-name">KOSPI ETF</div>
+      <div class="investment-return">+12.4%</div>
+    </div>
+    <div class="investment-details">
+      <span>₩5,000,000 투자</span>
+      <span>₩5,620,000 평가</span>
+    </div>
+  </div>
+
+  <div class="investment-card">
+    <div class="investment-header">
+      <div class="investment-name">미국 채권</div>
+      <div class="investment-return">+5.2%</div>
+    </div>
+    <div class="investment-details">
+      <span>₩10,000,000 투자</span>
+      <span>₩10,520,000 평가</span>
+    </div>
+  </div>
+
+  <div style="height: 80px;"></div>
+
+  <div class="chat-input">
+    <input type="text" placeholder="자산관리에 대해 물어보세요" />
+    <button class="send-button">➤</button>
+  </div>
+</body>
+</html>
