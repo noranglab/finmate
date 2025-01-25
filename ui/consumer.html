@@ -51,7 +51,7 @@
     }
 
     .balance-card {
-      background: linear-gradient(145deg, #1E40AF 0%, #1E3A8A 100%);
+      background: linear-gradient(145deg, #0F172A 0%, #131C3A 50%, #1E1B4B 100%);
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 16px;
@@ -82,20 +82,49 @@
     }
 
     .portfolio-item {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.06);
       border-radius: 12px;
       padding: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .portfolio-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .portfolio-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
     }
 
     .portfolio-label {
       color: #93C5FD;
       font-size: 12px;
-      margin-bottom: 4px;
     }
 
     .portfolio-value {
       font-size: 16px;
       font-weight: 600;
+    }
+
+    .portfolio-change {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .change-up {
+      color: #34D399;
+    }
+
+    .change-down {
+      color: #FF6B6B;
     }
 
     .insights-grid {
@@ -198,7 +227,7 @@
     }
 
     .expense-amount {
-      color: #EF4444;
+      color: #FF6B6B;
       font-weight: 600;
     }
 
@@ -302,27 +331,55 @@
     <div class="balance-amount">₩45,280,000</div>
     <div class="portfolio-grid">
       <div class="portfolio-item">
-        <div class="portfolio-label">현금성 자산</div>
-        <div class="portfolio-value">₩12,500,000</div>
+        <div class="portfolio-left">
+          <div class="portfolio-label">현금성 자산</div>
+          <div class="portfolio-value">₩12.5M</div>
+        </div>
+        <div class="portfolio-right">
+          <div class="portfolio-change change-up">
+            <span>▲ 2.1%</span>
+          </div>
+        </div>
       </div>
       <div class="portfolio-item">
-        <div class="portfolio-label">주식</div>
-        <div class="portfolio-value">₩15,600,000</div>
+        <div class="portfolio-left">
+          <div class="portfolio-label">주식</div>
+          <div class="portfolio-value">₩15.6M</div>
+        </div>
+        <div class="portfolio-right">
+          <div class="portfolio-change change-up">
+            <span>▲ 5.4%</span>
+          </div>
+        </div>
       </div>
       <div class="portfolio-item">
-        <div class="portfolio-label">펀드</div>
-        <div class="portfolio-value">₩8,680,000</div>
+        <div class="portfolio-left">
+          <div class="portfolio-label">펀드</div>
+          <div class="portfolio-value">₩8.7M</div>
+        </div>
+        <div class="portfolio-right">
+          <div class="portfolio-change change-down">
+            <span>▼ 1.2%</span>
+          </div>
+        </div>
       </div>
       <div class="portfolio-item">
-        <div class="portfolio-label">채권</div>
-        <div class="portfolio-value">₩8,500,000</div>
+        <div class="portfolio-left">
+          <div class="portfolio-label">채권</div>
+          <div class="portfolio-value">₩8.5M</div>
+        </div>
+        <div class="portfolio-right">
+          <div class="portfolio-change change-up">
+            <span>▲ 0.8%</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="insights-grid">
     <div class="insight-card">
-      <div class="insight-value" style="color: #EF4444">₩2.8M</div>
+      <div class="insight-value" style="color: #FF6B6B">₩2.8M</div>
       <div class="insight-label">이번 달 지출</div>
     </div>
     <div class="insight-card">
