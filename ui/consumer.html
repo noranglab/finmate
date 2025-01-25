@@ -51,7 +51,7 @@
     }
 
     .balance-card {
-      background: linear-gradient(145deg, #15203B 0%, #21325D 100%);
+      background: linear-gradient(145deg, #15203b 0%, #21325d 100%);
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 16px;
@@ -85,26 +85,26 @@
       background: rgba(255, 255, 255, 0.06);
       border-radius: 12px;
       padding: 12px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .portfolio-left {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .portfolio-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
     }
 
     .portfolio-label {
       color: #93C5FD;
       font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .portfolio-value-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .portfolio-value.up {
+      color: #34D399;
+    }
+
+    .portfolio-value.down {
+      color: #FF6B6B;
     }
 
     .portfolio-value {
@@ -114,9 +114,6 @@
 
     .portfolio-change {
       font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 2px;
     }
 
     .change-up {
@@ -331,47 +328,31 @@
     <div class="balance-amount">₩45,280,000</div>
     <div class="portfolio-grid">
       <div class="portfolio-item">
-        <div class="portfolio-left">
-          <div class="portfolio-label">현금성 자산</div>
-          <div class="portfolio-value">₩12.5M</div>
-        </div>
-        <div class="portfolio-right">
-          <div class="portfolio-change change-up">
-            <span>▲ 2.1%</span>
-          </div>
+        <div class="portfolio-label">현금성 자산</div>
+        <div class="portfolio-value-container">
+          <div class="portfolio-value up">₩12.5M</div>
+          <div class="portfolio-change change-up">▲ 2.1%</div>
         </div>
       </div>
       <div class="portfolio-item">
-        <div class="portfolio-left">
-          <div class="portfolio-label">주식</div>
-          <div class="portfolio-value">₩15.6M</div>
-        </div>
-        <div class="portfolio-right">
-          <div class="portfolio-change change-up">
-            <span>▲ 5.4%</span>
-          </div>
+        <div class="portfolio-label">주식</div>
+        <div class="portfolio-value-container">
+          <div class="portfolio-value up">₩15.6M</div>
+          <div class="portfolio-change change-up">▲ 5.4%</div>
         </div>
       </div>
       <div class="portfolio-item">
-        <div class="portfolio-left">
-          <div class="portfolio-label">펀드</div>
-          <div class="portfolio-value">₩8.7M</div>
-        </div>
-        <div class="portfolio-right">
-          <div class="portfolio-change change-down">
-            <span>▼ 1.2%</span>
-          </div>
+        <div class="portfolio-label">펀드</div>
+        <div class="portfolio-value-container">
+          <div class="portfolio-value down">₩8.7M</div>
+          <div class="portfolio-change change-down">▼ 1.2%</div>
         </div>
       </div>
       <div class="portfolio-item">
-        <div class="portfolio-left">
-          <div class="portfolio-label">채권</div>
-          <div class="portfolio-value">₩8.5M</div>
-        </div>
-        <div class="portfolio-right">
-          <div class="portfolio-change change-up">
-            <span>▲ 0.8%</span>
-          </div>
+        <div class="portfolio-label">채권</div>
+        <div class="portfolio-value-container">
+          <div class="portfolio-value up">₩8.5M</div>
+          <div class="portfolio-change change-up">▲ 0.8%</div>
         </div>
       </div>
     </div>
@@ -389,17 +370,17 @@
   </div>
 
   <div class="quick-actions">
-    <a href="transfer.html" class="action-item">
-      <div class="action-icon">💸</div>
-      <div class="action-label">이체</div>
-    </a>
-    <a href="income.html" class="action-item">
+    <a href="savings.html" class="action-item">
       <div class="action-icon">💰</div>
-      <div class="action-label">수입</div>
+      <div class="action-label">자산관리</div>
     </a>
-    <a href="expense.html" class="action-item">
-      <div class="action-icon">💳</div>
-      <div class="action-label">지출</div>
+    <a href="investments.html" class="action-item">
+      <div class="action-icon">📈</div>
+      <div class="action-label">투자관리</div>
+    </a>
+    <a href="tax.html" class="action-item">
+      <div class="action-icon">📊</div>
+      <div class="action-label">세무관리</div>
     </a>
   </div>
 
