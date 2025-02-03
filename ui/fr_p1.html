@@ -18,286 +18,597 @@
       background-color: #0A0F1D;
       color: #E8EAED;
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
     }
 
     .header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       margin-bottom: 24px;
-      gap: 12px;
     }
 
     .back-button {
-      background: rgba(255, 255, 255, 0.05);
-      border: none;
-      border-radius: 10px;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #E8EAED;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .page-title {
-      font-size: clamp(20px, 5vw, 24px);
-      font-weight: 600;
-    }
-
-    .main-card {
-      background: linear-gradient(145deg, #1E293B 0%, #1E3A34 100%);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 16px;
+      color: #8B8F98;
+      text-decoration: none;
+      font-size: 24px;
     }
 
     .project-title {
-      font-size: clamp(18px, 4.5vw, 20px);
+      font-size: clamp(18px, 5vw, 20px);
       font-weight: 600;
-      color: #34D399;
     }
 
-    .project-status {
-      background: rgba(52, 211, 153, 0.1);
-      color: #34D399;
+    .action-button {
+      background: none;
+      border: none;
+      color: #8B8F98;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .status-banner {
+      background: linear-gradient(145deg, #1E293B 0%, #1E3A34 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .status-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .client-info {
+      color: #8B8F98;
+      font-size: 14px;
+    }
+
+    .status-badge {
+      display: inline-block;
       padding: 6px 12px;
       border-radius: 20px;
       font-size: 14px;
       font-weight: 500;
     }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 16px;
+    .status-progress {
+      background: rgba(251, 191, 36, 0.1);
+      color: #FBBF24;
     }
 
-    .info-item {
+    .progress-bar {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: #34D399;
+      height: 100%;
+      width: 75%;
+    }
+
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+      padding: 4px;
       background: rgba(255, 255, 255, 0.03);
-      padding: 12px;
       border-radius: 12px;
+    }
+
+    .tab-button {
+      flex: 1;
+      background: none;
+      border: none;
+      color: #8B8F98;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .tab-button.active {
+      background: rgba(52, 211, 153, 0.1);
+      color: #34D399;
+    }
+
+    .section-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .contract-status {
+      background: rgba(52, 211, 153, 0.1);
+      color: #34D399;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .waiting {
+      background: rgba(251, 191, 36, 0.1);
+      color: #FBBF24;
+    }
+
+    .section-content {
+      padding: 16px;
+    }
+
+    .contract-info {
+      display: grid;
+      gap: 16px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 12px;
+      font-size: 14px;
     }
 
     .info-label {
       color: #8B8F98;
-      font-size: 13px;
-      margin-bottom: 4px;
     }
 
-    .info-value {
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .section-title {
-      margin: 24px 0 16px;
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .milestone-card {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 12px;
-    }
-
-    .milestone-header {
+    .action-row {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
+      gap: 8px;
+      margin-top: 16px;
     }
 
-    .milestone-title {
-      font-weight: 500;
-    }
-
-    .milestone-date {
-      color: #8B8F98;
+    .action-button-secondary {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      color: #E8EAED;
       font-size: 14px;
-    }
-
-    .progress-bar {
-      height: 4px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
-      margin-top: 12px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: #34D399;
-      border-radius: 2px;
-      transition: width 0.3s ease;
-    }
-
-    .task-list {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 12px;
-    }
-
-    .task-item {
+      cursor: pointer;
       display: flex;
       align-items: center;
-      padding: 12px 0;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .action-button-primary {
+      flex: 1;
+      background: #34D399;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      color: #1A1F2E;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .progress-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .progress-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding-bottom: 12px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .task-item:last-child {
+    .progress-item:last-child {
       border-bottom: none;
       padding-bottom: 0;
     }
 
-    .task-checkbox {
-      width: 20px;
-      height: 20px;
-      border: 2px solid #34D399;
-      border-radius: 6px;
-      margin-right: 12px;
+    .progress-date {
+      color: #8B8F98;
+      font-size: 13px;
+      min-width: 80px;
+    }
+
+    .progress-content {
+      flex: 1;
+      font-size: 14px;
+    }
+
+    .progress-badge {
+      background: rgba(52, 211, 153, 0.1);
+      color: #34D399;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    .file-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      margin-bottom: 8px;
     }
 
-    .task-checked {
-      background: #34D399;
+    .file-icon {
+      font-size: 20px;
     }
 
-    .task-details {
+    .file-info {
       flex: 1;
     }
 
-    .task-title {
-      font-size: 15px;
-      margin-bottom: 4px;
+    .file-name {
+      font-size: 14px;
+      margin-bottom: 2px;
     }
 
-    .task-meta {
+    .file-meta {
+      color: #8B8F98;
+      font-size: 12px;
+    }
+
+    .file-download {
+      color: #34D399;
+      font-size: 20px;
+    }
+
+    .tax-info {
+      display: grid;
+      gap: 12px;
+    }
+
+    .tax-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+    }
+
+    .tax-label {
+      font-size: 14px;
+    }
+
+    .tax-value {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 15, 29, 0.8);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 12px 16px;
       display: flex;
       gap: 12px;
-      color: #8B8F98;
-      font-size: 13px;
     }
 
-    .action-button {
+    .nav-button {
+      flex: 1;
       background: #34D399;
-      color: #1A1F2E;
       border: none;
-      border-radius: 12px;
-      padding: 14px;
-      width: 100%;
-      font-size: 16px;
-      font-weight: 600;
+      border-radius: 10px;
+      padding: 12px;
+      color: #1A1F2E;
+      font-size: 14px;
+      font-weight: 500;
       cursor: pointer;
-      margin-top: 24px;
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <button class="back-button" onclick="location.href='freelancer.html' ">←</button>
-    <div class="page-title">프로젝트 상세</div>
+    <a href="project-list.html" class="back-button">←</a>
+    <div class="project-title">웹 개발 프로젝트</div>
+    <button class="action-button">⋮</button>
   </div>
 
-  <div class="main-card">
-    <div class="project-header">
-      <div class="project-title">웹 개발 프로젝트</div>
-      <div class="project-status">진행중</div>
-    </div>
-    
-    <div class="info-grid">
-      <div class="info-item">
-        <div class="info-label">클라이언트</div>
-        <div class="info-value">A사</div>
+  <div class="status-banner">
+    <div class="status-header">
+      <div>
+        <div class="client-info">A사 (담당자: 김철수)</div>
+        <div style="margin: 8px 0;">₩3,500,000</div>
+        <span class="status-badge status-progress">진행중</span>
       </div>
-      <div class="info-item">
-        <div class="info-label">계약금액</div>
-        <div class="info-value">₩3,500,000</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">계약일</div>
-        <div class="info-value">2025.01.14</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">마감일</div>
-        <div class="info-value">2025.01.28</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-title">마일스톤</div>
-  
-  <div class="milestone-card">
-    <div class="milestone-header">
-      <div class="milestone-title">디자인 시안 확정</div>
-      <div class="milestone-date">D-2</div>
     </div>
     <div class="progress-bar">
-      <div class="progress-fill" style="width: 80%"></div>
+      <div class="progress-fill"></div>
+    </div>
+    <div class="progress-stats">
+      <span>진행률 75%</span>
+      <span>마감까지 7일</span>
     </div>
   </div>
 
-  <div class="milestone-card">
-    <div class="milestone-header">
-      <div class="milestone-title">프론트엔드 개발</div>
-      <div class="milestone-date">D-5</div>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" style="width: 45%"></div>
-    </div>
+  <div class="tab-container">
+    <button class="tab-button active">계약관리</button>
+    <button class="tab-button">진행현황</button>
+    <button class="tab-button">파일/문서</button>
+    <button class="tab-button">세금관리</button>
   </div>
 
-  <div class="section-title">세부 작업</div>
-
-  <div class="task-list">
-    <div class="task-item">
-      <div class="task-checkbox task-checked">✓</div>
-      <div class="task-details">
-        <div class="task-title">와이어프레임 작성</div>
-        <div class="task-meta">
-          <span>우선순위: 높음</span>
-          <span>완료</span>
-        </div>
-      </div>
+  <!-- 계약관리 탭 -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-title">전자계약서</div>
+      <span class="contract-status waiting">서명 대기중</span>
     </div>
-
-    <div class="task-item">
-      <div class="task-checkbox"></div>
-      <div class="task-details">
-        <div class="task-title">메인 페이지 UI 개발</div>
-        <div class="task-meta">
-          <span>우선순위: 중간</span>
-          <span>진행중</span>
+    <div class="section-content">
+      <div class="contract-info">
+        <div class="info-row">
+          <div class="info-label">계약일자</div>
+          <div>2024.01.15</div>
         </div>
-      </div>
-    </div>
-
-    <div class="task-item">
-      <div class="task-checkbox"></div>
-      <div class="task-details">
-        <div class="task-title">반응형 레이아웃 구현</div>
-        <div class="task-meta">
-          <span>우선순위: 중간</span>
-          <span>대기중</span>
+        <div class="info-row">
+          <div class="info-label">계약기간</div>
+          <div>2024.01.15 - 2024.02.10</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">계약금액</div>
+          <div>₩3,500,000 (부가세 별도)</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">지급조건</div>
+          <div>착수금 40%, 중도금 30%, 잔금 30%</div>
+        </div>
+        <div class="action-row">
+          <button class="action-button-secondary">📋 계약서 보기</button>
+          <button class="action-button-secondary">🔗 계약서 링크</button>
+          <button class="action-button-primary">✍️ 서명하기</button>
         </div>
       </div>
     </div>
   </div>
 
-  <button class="action-button">작업 추가하기</button>
+  <!-- 진행현황 탭 -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-title">진행현황</div>
+    </div>
+    <div class="section-content">
+      <div class="progress-list">
+        <div class="progress-item">
+          <div class="progress-date">2024.02.03</div>
+          <div class="progress-content">
+            메인 페이지 디자인 검수 완료
+            <span class="progress-badge">마일스톤</span>
+          </div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-date">2024.02.01</div>
+          <div class="progress-content">중도금 입금 완료</div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-date">2024.01.25</div>
+          <div class="progress-content">1차 중간보고 미팅 진행</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 파일/문서 탭 -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-title">프로젝트 문서</div>
+    </div>
+    <div class="section-content">
+      <div class="file-row">
+        <div class="file-icon">📄</div>
+        <div class="file-info">
+          <div class="file-name">요구사항정의서.pdf</div>
+          <div class="file-meta">PDF • 2.5MB • 2024.01.15</div>
+        </div>
+        <div class="file-download">↓</div>
+      </div>
+      <div class="file-row">
+        <div class="file-icon">📄</div>
+        <div class="file-info">
+          <div class="file-name">계약서.pdf</div>
+          <div class="file-meta">PDF • 1.2MB • 2024.01.15</div>
+        </div>
+        <div class="file-download">↓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 세금관리 탭 -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-title">세금 관리</div>
+    </div>
+    <div class="section-content">
+      <div class="tax-info">
+        <div class="tax-row">
+          <div class="tax-label">계약금액</div>
+          <div class="tax-value">₩3,500,000</div>
+        </div>
+        <div class="tax-row">
+          <div class="tax-label">부가세 (10%)</div>
+          <div class="tax-value">₩350,000</div>
+        </div>
+        <div class="tax-row">
+          <div class="tax-label">총 수령액</div>
+          <div class="tax-value">₩3,850,000</div>
+        </div>
+        <div style="margin: 16px 0;">
+          <div class="section-title" style="margin-bottom: 12px;">수금 현황</div>
+          <div class="tax-row">
+            <div class="tax-label">착수금 (40%)</div>
+            <div class="tax-value">
+              <span style="color: #34D399">완료</span>
+              <div style="font-size: 12px; color: #8B8F98;">2024.01.15</div>
+            </div>
+          </div>
+          <div class="tax-row">
+            <div class="tax-label">중도금 (30%)</div>
+            <div class="tax-value">
+              <span style="color: #34D399">완료</span>
+              <div style="font-size: 12px; color: #8B8F98;">2024.02.01</div>
+            </div>
+          </div>
+          <div class="tax-row">
+            <div class="tax-label">잔금 (30%)</div>
+            <div class="tax-value">
+              <span style="color: #FBBF24">미수금</span>
+            </div>
+          </div>
+        </div>
+                  <div style="margin: 16px 0;">
+            <div class="section-title" style="margin-bottom: 12px;">세금계산서</div>
+            <div class="tax-invoice-row">
+              <div class="tax-invoice-info">
+                <div class="tax-invoice-title">착수금 세금계산서</div>
+                <div class="tax-invoice-date">발행일: 2024.01.15</div>
+              </div>
+              <button class="tax-invoice-button secondary">보기</button>
+            </div>
+            <div class="tax-invoice-row">
+              <div class="tax-invoice-info">
+                <div class="tax-invoice-title">중도금 세금계산서</div>
+                <div class="tax-invoice-date">발행일: 2024.02.01</div>
+              </div>
+              <button class="tax-invoice-button secondary">보기</button>
+            </div>
+            <div class="tax-invoice-row">
+              <div class="tax-invoice-info">
+                <div class="tax-invoice-title">잔금 세금계산서</div>
+                <div class="tax-invoice-date">미발행</div>
+              </div>
+              <button class="tax-invoice-button primary">발행하기</button>
+            </div>
+          </div>
+
+          <style>
+            .tax-invoice-row {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 12px;
+              background: rgba(255, 255, 255, 0.02);
+              border-radius: 8px;
+              margin-bottom: 8px;
+            }
+            
+            .tax-invoice-info {
+              flex: 1;
+              min-width: 0;
+              padding-right: 16px;
+            }
+            
+            .tax-invoice-title {
+              font-size: 14px;
+              color: #E8EAED;
+              margin-bottom: 4px;
+            }
+            
+            .tax-invoice-date {
+              font-size: 12px;
+              color: #8B8F98;
+            }
+            
+            .tax-invoice-button {
+              min-width: 80px;
+              padding: 8px 12px;
+              border: none;
+              border-radius: 8px;
+              font-size: 14px;
+              cursor: pointer;
+              white-space: nowrap;
+            }
+            
+            .tax-invoice-button.secondary {
+              background: rgba(255, 255, 255, 0.05);
+              color: #E8EAED;
+            }
+            
+            .tax-invoice-button.primary {
+              background: #34D399;
+              color: #1A1F2E;
+            }
+          </style>
+      </div>
+    </div>
+  </div>
+
+  <!-- 메모 및 특이사항 섹션 -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-title">메모 및 특이사항</div>
+    </div>
+    <div class="section-content">
+      <div class="memo-list">
+        <div class="progress-item">
+          <div class="progress-date">2024.02.03</div>
+          <div class="progress-content">디자인 수정사항 2차 피드백 반영 필요</div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-date">2024.01.25</div>
+          <div class="progress-content">로그인 기능 추가 요청 - 별도 견적 필요</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <button class="nav-button">프로젝트 완료 처리</button>
+  </div>
+
+  <style>
+    .memo-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .memo-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      color: #E8EAED;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+  </style>
 </body>
 </html>
