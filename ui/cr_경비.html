@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #13111C;
+      color: #E8EAED;
+      line-height: 1.5;
+      padding: 16px;
+      padding-bottom: 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .date-header {
+      margin: 32px 0 24px;
+      position: relative;
+    }
+
+    .date-header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .date-title {
+      font-size: 20px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #E9DFFC 0%, #A78BFA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .date-summary {
+      display: flex;
+      gap: 24px;
+      align-items: flex-end;
+    }
+
+    .date-total, .date-count {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .date-total .label, .date-count .label {
+      font-size: 13px;
+      color: #9CA3AF;
+      margin-bottom: 4px;
+    }
+
+    .date-total .amount {
+      font-size: 18px;
+      font-weight: 600;
+      color: #A78BFA;
+    }
+
+    .date-count .count {
+      font-size: 18px;
+      font-weight: 600;
+      color: #E8EAED;
+    }
+
+    .date-divider {
+      height: 1px;
+      background: linear-gradient(90deg, 
+        rgba(167, 139, 250, 0.2) 0%, 
+        rgba(167, 139, 250, 0.5) 50%,
+        rgba(167, 139, 250, 0.2) 100%
+      );
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .back-button {
+      color: #9CA3AF;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .summary-card {
+      background: linear-gradient(145deg, #2D2640 0%, #1F1B29 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .expense-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .stat-label {
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* Calendar Styles */
+    .calendar-section {
+      background: linear-gradient(145deg, #2D2640 0%, #1F1B29 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .calendar-nav-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      color: #E8EAED;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .calendar {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 14px;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+    }
+
+    .calendar-weekdays div {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .calendar-days div {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      font-size: 14px;
+    }
+
+    .calendar-days div:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .prev-month, .next-month {
+      color: #4B5563;
+    }
+
+    .has-expense {
+      color: #A78BFA;
+      font-weight: 500;
+    }
+
+    .has-expense::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: #A78BFA;
+      border-radius: 50%;
+    }
+
+    .add-date-expense {
+      background: rgba(167, 139, 250, 0.2);
+      border: 1px solid #A78BFA;
+      border-radius: 6px;
+      padding: 4px 12px;
+      color: #A78BFA;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 12px;
+      transition: all 0.2s;
+    }
+
+    .add-date-expense:hover {
+      background: rgba(167, 139, 250, 0.3);
+    }
+
+    .add-date-expense span {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .calendar-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 14px;
+      color: #9CA3AF;
+    }
+
+    .summary-dot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #A78BFA;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .selected-date {
+      color: #E8EAED;
+      font-weight: 500;
+    }
+
+    /* Expense List Styles */
+    .expense-list {
+      margin-top: 24px;
+    }
+
+    .expense-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .expense-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .expense-title {
+      font-weight: 600;
+    }
+
+    .expense-amount {
+      color: #A78BFA;
+      font-weight: 600;
+    }
+
+    .expense-details {
+      color: #9CA3AF;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .expense-category {
+      background: rgba(167, 139, 250, 0.1);
+      color: #A78BFA;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .receipt-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .receipt-filename {
+      color: #9CA3AF;
+      font-size: 12px;
+      word-break: break-all;
+    }
+
+    .receipt-preview {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .calendar-days div.selected {
+      background: rgba(167, 139, 250, 0.2);
+      color: #A78BFA;
+      font-weight: 600;
+    }
+
+    .add-expense-button {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%);
+      width: 56px;
+      height: 56px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
+      z-index: 100;
+      transition: transform 0.2s;
+    }
+
+    .add-expense-button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-content {
+      background: #1F1B29;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      color: #9CA3AF;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px;
+      color: #E8EAED;
+      font-size: 16px;
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: #A78BFA;
+    }
+
+    .upload-area {
+      border: 2px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .submit-button {
+      width: 100%;
+      background: #A78BFA;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Rest of the HTML content remains the same -->
+  <div class="header">
+    <a href="#" class="back-button">
+      ← 뒤로가기
+    </a>
+    <div class="page-title">경비 관리</div>
+    <div style="width: 24px;"></div>
+  </div>
+
+  <div class="summary-card">
+    <div>이번 달 경비 현황</div>
+    <div class="expense-stats">
+      <div class="stat-item">
+        <div class="stat-label">총 지출</div>
+        <div class="stat-value">₩4,850,000</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">증빙자료</div>
+        <div class="stat-value">32건</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calendar-section">
+    <div class="calendar-header">
+      <button class="calendar-nav-btn">◀</button>
+      <h3>2024년 2월</h3>
+      <button class="calendar-nav-btn">▶</button>
+    </div>
+    <div class="calendar">
+      <div class="calendar-weekdays">
+        <div>일</div>
+        <div>월</div>
+        <div>화</div>
+        <div>수</div>
+        <div>목</div>
+        <div>금</div>
+        <div>토</div>
+      </div>
+      <div class="calendar-days">
+        <div class="prev-month">28</div>
+        <div class="prev-month">29</div>
+        <div class="prev-month">30</div>
+        <div class="prev-month">31</div>
+        <div>1</div>
+        <div class="has-expense">2</div>
+        <div>3</div>
+        <div>4</div>
+        <div class="has-expense">5</div>
+        <div>6</div>
+        <div>7</div>
+        <div class="has-expense selected">8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div>12</div>
+        <div>13</div>
+        <div>14</div>
+        <div>15</div>
+        <div>16</div>
+        <div>17</div>
+        <div>18</div>
+        <div>19</div>
+        <div>20</div>
+        <div>21</div>
+        <div>22</div>
+        <div>23</div>
+        <div>24</div>
+        <div>25</div>
+        <div>26</div>
+        <div>27</div>
+        <div>28</div>
+        <div>29</div>
+        <div class="next-month">1</div>
+        <div class="next-month">2</div>
+      </div>
+      <div class="calendar-summary">
+        <div class="summary-dot">
+          <span class="dot"></span>
+          지출 있음
+        </div>
+        <div>
+          선택 날짜: <span class="selected-date">2024.02.08</span>
+          <button class="add-date-expense" onclick="showModal()">
+            <span>+</span> 경비 추가
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="date-header">
+    <div class="date-header-content">
+      <div class="date-title">2024년 2월 8일</div>
+      <div class="date-summary">
+        <div class="date-total">
+          <span class="label">당일 지출</span>
+          <span class="amount">₩2,830,800</span>
+        </div>
+        <div class="date-count">
+          <span class="label">증빙자료</span>
+          <span class="count">2건</span>
+        </div>
+      </div>
+    </div>
+    <div class="date-divider"></div>
+  </div>
+
+  <div class="expense-list">
+
+    <div class="expense-item">
+      <div class="expense-header">
+        <div class="expense-title">카메라 장비 구매</div>
+        <div class="expense-amount">₩2,800,000</div>
+      </div>
+      <div class="expense-details">
+        <div>
+          <span class="expense-category">장비구매 - 촬영장비</span>
+          <span style="margin-left: 8px; font-size: 12px;">2024.02.08</span>
+        </div>
+        <div class="receipt-info">
+          <span class="receipt-filename">invoice_240208.pdf</span>
+          <div class="receipt-preview">🧾</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="expense-item">
+      <div class="expense-header">
+        <div class="expense-title">Adobe Premiere Pro 결제</div>
+        <div class="expense-amount">₩30,800</div>
+      </div>
+      <div class="expense-details">
+        <div>
+          <span class="expense-category">소프트웨어 결제</span>
+          <span style="margin-left: 8px; font-size: 12px;">2024.02.08</span>
+        </div>
+        <div class="receipt-info">
+          <span class="receipt-filename">adobe_240208.jpg</span>
+          <div class="receipt-preview">🧾</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- More expense items... -->
+    
+  </div>
+
+  <button class="add-expense-button" onclick="showModal
