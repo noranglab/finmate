@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* 기존 스타일 유지 */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
     * {
@@ -12,12 +13,12 @@
     }
 
     body {
-      margin: 0;
-      padding: 16px;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, sans-serif;
       background-color: #13111C;
       color: #E8EAED;
       line-height: 1.5;
+      padding: 16px;
+      padding-bottom: 80px;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -29,10 +30,10 @@
     }
 
     .logo {
-      font-size: clamp(24px, 6vw, 28px);
+      font-size: 28px;
       font-weight: 700;
-      letter-spacing: -0.5px;
       background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%);
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -40,14 +41,7 @@
     .subtitle {
       color: #9CA3AF;
       margin-top: 4px;
-      font-size: clamp(14px, 3.5vw, 16px);
-      font-weight: 500;
-    }
-
-    .icons {
-      display: flex;
-      gap: 16px;
-      font-size: clamp(20px, 5vw, 24px);
+      font-size: 16px;
     }
 
     .main-card {
@@ -55,37 +49,6 @@
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 24px;
-    }
-
-    .amount {
-      font-size: clamp(28px, 7vw, 32px);
-      font-weight: 700;
-      margin: 12px 0;
-      letter-spacing: -0.5px;
-    }
-
-    .management-menu {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .menu-item {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    .menu-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .menu-label {
-      font-size: 14px;
-      color: #9CA3AF;
     }
 
     .platform-stats {
@@ -102,17 +65,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
     }
 
-    .platform-logo {
-      width: 32px;
-      height: 32px;
-      background: #2D2640;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+    .platform-card:hover {
+      opacity: 0.8;
     }
 
     .platform-logo {
@@ -123,17 +81,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 6px;
-    }
-    
-    .platform-logo svg {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
-
-    .platform-info {
-      flex: 1;
     }
 
     .platform-name {
@@ -147,34 +94,43 @@
       font-size: 16px;
     }
 
-    .section-title {
-      margin: 24px 0 16px 0;
-      font-size: clamp(16px, 4.5vw, 18px);
-      font-weight: 600;
+    .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin: 24px 0 16px;
     }
 
-    .lst-card {
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .view-all {
+      color: #A78BFA;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .ad-card {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 14px;
       padding: 16px;
       margin-bottom: 12px;
     }
 
-    .lst-header {
+    .ad-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
     }
 
-    .lst-company {
+    .company-name {
       font-weight: 600;
     }
 
-    .lst-status {
+    .status-badge {
       background: #A78BFA;
       color: white;
       padding: 4px 12px;
@@ -182,33 +138,45 @@
       font-size: 12px;
     }
 
-    .lst-details {
+    .ad-details {
       color: #9CA3AF;
       font-size: 14px;
     }
 
-    .management-menu {
+    .quick-actions {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
       margin-top: 24px;
     }
 
-    .menu-item {
+    .action-button {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 14px;
       padding: 16px;
       text-align: center;
+      cursor: pointer;
+      transition: opacity 0.2s;
     }
 
-    .menu-icon {
+    .action-button:hover {
+      opacity: 0.8;
+    }
+
+    .action-icon {
       font-size: 24px;
       margin-bottom: 8px;
     }
 
-    .menu-label {
+    .action-label {
       font-size: 14px;
       color: #9CA3AF;
+    }
+
+    .platform-logo svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
     }
 
     .chat-input {
@@ -223,15 +191,6 @@
       left: 16px;
       right: 16px;
       backdrop-filter: blur(10px);
-    }
-
-    .platform-card, .menu-item, .lst-card, .view-all {
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-
-    .platform-card:hover, .menu-item:hover, .lst-card:hover, .view-all:hover {
-      opacity: 0.8;
     }
 
     .chat-input input {
@@ -272,7 +231,7 @@
       <div class="logo">FINMATE</div>
       <div class="subtitle">크리에이터</div>
     </div>
-    <div class="icons">
+    <div style="display: flex; gap: 16px; font-size: 24px;">
       <span>🔔</span>
       <span>⚙️</span>
     </div>
@@ -280,48 +239,48 @@
 
   <div class="main-card">
     <div>이번 달 총 수익</div>
-    <div class="amount">₩12,850,000</div>
+    <div style="font-size: 32px; font-weight: 700; margin: 12px 0;">₩12,850,000</div>
     <div class="platform-stats">
       <div class="platform-card">
         <div class="platform-logo">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 24 24">
             <path d="M23.5 6.507c-.277-1.024-.999-1.826-2.024-2.104C19.515 4 12 4 12 4S4.485 4 2.524 4.403c-1.025.278-1.747 1.08-2.024 2.104C0 8.468 0 12 0 12s0 3.532.5 5.493c.277 1.024.999 1.826 2.024 2.104C4.485 20 12 20 12 20s7.515 0 9.476-.403c1.025-.278 1.747-1.08 2.024-2.104.5-1.961.5-5.493.5-5.493s0-3.532-.5-5.493zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
         </div>
-        <div class="platform-info">
+        <div>
           <div class="platform-name">유튜브</div>
           <div class="platform-revenue">₩8.2M</div>
         </div>
       </div>
       <div class="platform-card">
         <div class="platform-logo">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 24 24">
             <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
           </svg>
         </div>
-        <div class="platform-info">
+        <div>
           <div class="platform-name">인스타그램</div>
           <div class="platform-revenue">₩4.6M</div>
         </div>
       </div>
       <div class="platform-card">
         <div class="platform-logo">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill="white" d="M19.321 6.88c-.217-1.825-.964-3.367-2.057-4.657C15.987.92 14.323.156 12.48.022c-1.842-.133-3.675.286-5.277 1.213C5.485 2.194 4.164 3.45 3.253 5.053 2.341 6.656 1.931 8.323 2.024 10.054c.093 1.731.723 3.378 1.819 4.753 1.095 1.375 2.543 2.386 4.171 2.93-.288-1.195-.783-2.219-1.483-3.071-.701-.853-1.592-1.48-2.676-1.883.288-.267.517-.57.689-.907.171-.338.292-.692.364-1.062.072-.37.108-.806.108-1.307V8.826h2.677V7.129H5.016V5.432h2.785V3.735H5.016V2.038h2.785V.341h1.697v1.697h2.785v1.697h-2.785v1.697h2.785v1.697h-2.785v1.697h2.785v2.082c.558 0 1.108-.063 1.648-.19.54-.127 1.07-.303 1.591-.53v2.385c-.937.33-1.874.507-2.81.53-.937.025-1.874-.088-2.811-.34.648 1.375 1.455 2.372 2.419 2.993.964.62 2.057.93 3.278.93V19.3c-1.49 0-2.827-.342-4.009-1.024-1.183-.683-2.195-1.714-3.04-3.094-.846 1.38-1.858 2.411-3.04 3.094C3.508 18.958 2.171 19.3.682 19.3v-1.697c1.22 0 2.313-.31 3.277-.93.964-.621 1.77-1.618 2.419-2.993-1.221.304-2.419.405-3.595.303-1.176-.101-2.301-.405-3.374-.911.054-1.883.59-3.513 1.609-4.89 1.019-1.376 2.358-2.295 4.018-2.753V7.23c-.09.405-.199.75-.326 1.035-.127.286-.326.56-.599.825 1.004.405 1.86.947 2.57 1.629.71.683 1.293 1.535 1.751 2.557.468-1.28 1.131-2.358 1.99-3.235.86-.876 1.824-1.517 2.894-1.922-.382-.254-.627-.571-.735-.952-.109-.38-.163-.8-.163-1.26V5.226h2.677V3.53h-2.677V1.832h2.677V.136h1.697v1.697h2.785v1.697h-2.785v1.697h2.785v1.697h-2.785v1.697h2.677v1.375c1.111.05 2.024.405 2.74 1.062.716.658 1.221 1.44 1.518 2.347.296.907.444 1.844.444 2.81h-1.697c0-.987-.186-1.857-.558-2.612-.372-.754-.923-1.35-1.652-1.788a3.404 3.404 0 0 0-.308 1.432c0 .532.054.989.163 1.375h-1.697c-.108-.405-.163-.88-.163-1.425 0-.545.082-1.075.245-1.592a4.732 4.732 0 0 1-.871.476c-.296.114-.678.196-1.144.245v6.996c0 .633-.218 1.157-.653 1.571-.436.415-.996.622-1.679.622h-1.697v-1.697h1.697V9.085a5.937 5.937 0 0 1-1.969-.285 4.063 4.063 0 0 1-1.534-.877c.27-.368.439-.782.508-1.244.069-.463.103-.931.103-1.407V4.337h2.677V2.64h-2.677V.943h2.677V-.755h1.697V.943h2.785v1.697h-2.785v1.697h2.785v1.697h-2.785v1.697h2.677V9.16c.486-.05.876-.133 1.171-.25.296-.114.587-.26.872-.435.27.52.535.901.79 1.143.257.241.503.413.737.514-.108.823-.304 1.603-.587 2.34a8.615 8.615 0 0 1-1.171 2.039h-1.807a11.69 11.69 0 0 0 1.144-2.136c.296-.773.472-1.579.526-2.417l-.436.095a3.56 3.56 0 0 1-.526.068h-.708v6.792c0 .646-.222 1.183-.667 1.61-.445.428-1.009.642-1.693.642h-1.697v-1.697h1.697V9.15c-.472.013-.899-.019-1.28-.095a4.769 4.769 0 0 1-1.117-.38v8.855c0 .646-.222 1.183-.667 1.61-.444.428-1.009.642-1.692.642h-1.698v-1.697h1.698V8.61Z"/>
+          <svg viewBox="0 0 24 24">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
           </svg>
         </div>
-        <div class="platform-info">
+        <div>
           <div class="platform-name">틱톡</div>
           <div class="platform-revenue">₩3.8M</div>
         </div>
       </div>
       <div class="platform-card">
         <div class="platform-logo">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 24 24">
             <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
           </svg>
         </div>
-        <div class="platform-info">
+        <div>
           <div class="platform-name">트위치</div>
           <div class="platform-revenue">₩2.1M</div>
         </div>
@@ -329,45 +288,47 @@
     </div>
   </div>
 
-  <div class="section-title">
-    <span>광고 문의</span>
-    <span style="color: #A78BFA; font-size: 14px;">전체보기</span>
+  <div class="section-header">
+    <h2 class="section-title">광고 문의</h2>
+    <a href="/ads" class="view-all">전체보기</a>
   </div>
 
-  <div class="lst-card">
-    <div class="lst-header">
-      <div class="lst-company">A 화장품</div>
-      <div class="lst-status">신규</div>
+  <div class="ad-card">
+    <div class="ad-header">
+      <div class="company-name">A 화장품</div>
+      <div class="status-badge">신규</div>
     </div>
-    <div class="lst-details">
+    <div class="ad-details">
       제품 리뷰 • 예산 ₩2.5M<br>
       마감일: 2024.02.15
     </div>
   </div>
 
-  <div class="lst-card">
-    <div class="lst-header">
-      <div class="lst-company">B 식품</div>
-      <div class="lst-status" style="background: #4B5563">진행중</div>
+  <div class="ad-card">
+    <div class="ad-header">
+      <div class="company-name">B 식품</div>
+      <div class="status-badge" style="background: #4B5563">진행중</div>
     </div>
-    <div class="lst-details">
+    <div class="ad-details">
       브랜디드 콘텐츠 • 예산 ₩3.8M<br>
       마감일: 2024.02.28
     </div>
   </div>
 
-  <div class="management-menu">
-    <div class="menu-item">
-      <div class="menu-icon">📊</div>
-      <div class="menu-label">수익 분석</div>
+  <div class="quick-actions" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="action-button">
+      <a href="/finmate/ui/cr_경비.html" style="text-decoration: none; color: inherit;">
+        <div class="action-icon">🧾</div>
+        <div class="action-label">경비 관리</div>
+      </a>
     </div>
-    <div class="menu-item">
-      <div class="menu-icon">🧾</div>
-      <div class="menu-label">경비 처리</div>
+    <div class="action-button">
+      <div class="action-icon">📒</div>
+      <div class="action-label">장부 관리</div>
     </div>
-    <div class="menu-item">
-      <div class="menu-icon">💰</div>
-      <div class="menu-label">세금 관리</div>
+    <div class="action-button">
+      <div class="action-icon">👥</div>
+      <div class="action-label">직원 관리</div>
     </div>
   </div>
 
@@ -377,5 +338,6 @@
     <input type="text" placeholder="수익 관리에 대해 물어보세요" />
     <button class="send-button">➤</button>
   </div>
+
 </body>
 </html>
