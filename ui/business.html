@@ -89,6 +89,31 @@
       font-size: 14px;
     }
 
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .action-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .action-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .action-label {
+      font-size: 14px;
+      color: #9CA3AF;
+    }
+
     .section-title {
       margin: 24px 0 16px 0;
       font-size: clamp(16px, 4.5vw, 18px);
@@ -130,31 +155,6 @@
       font-size: 14px;
     }
 
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .action-item {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 16px 12px;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .action-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .action-label {
-      font-size: 14px;
-      color: #9CA3AF;
-    }
-
     .employee-card {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 14px;
@@ -183,6 +183,10 @@
       color: #1A1D2D;
     }
 
+    .employee-details {
+      flex-grow: 1;
+    }
+
     .employee-details h3 {
       margin: 0;
       font-size: 16px;
@@ -193,6 +197,17 @@
       margin: 4px 0 0 0;
       color: #9CA3AF;
       font-size: 14px;
+    }
+
+    .employee-action-btn {
+      background: #4FD1C5;
+      color: #1A1D2D;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
     .chat-input {
@@ -272,6 +287,21 @@
     </div>
   </div>
 
+  <div class="quick-actions">
+    <div class="action-item">
+      <div class="action-icon">📒</div>
+      <div class="action-label">장부 관리</div>
+    </div>
+    <div class="action-item">
+      <div class="action-icon">🧾</div>
+      <div class="action-label">경비 관리</div>
+    </div>
+    <div class="action-item">
+      <div class="action-icon">💰</div>
+      <div class="action-label">세금 신고</div>
+    </div>
+  </div>
+
   <div class="section-title">
     <span>신청 가능한 지원금</span>
     <span style="color: #4FD1C5; font-size: 14px;">전체보기</span>
@@ -299,26 +329,10 @@
     </div>
   </div>
 
-  <div class="quick-actions">
-    <div class="action-item">
-      <div class="action-icon">📊</div>
-      <div class="action-label">매출 분석</div>
-    </div>
-    <div class="action-item">
-      <div class="action-icon">🧾</div>
-      <div class="action-label">경비 처리</div>
-    </div>
-    <div class="action-item">
-      <div class="action-icon">💰</div>
-      <div class="action-label">세금 신고</div>
-    </div>
-    <div class="action-item">
-      <div class="action-icon">👥</div>
-      <div class="action-label">알바 관리</div>
-    </div>
+  <div class="section-title">
+    <span>알바생 근무 현황</span>
+    <div class="employee-action-btn">관리하기</div>
   </div>
-
-  <div class="section-title">알바생 근무 현황</div>
 
   <div class="employee-card">
     <div class="employee-info">
