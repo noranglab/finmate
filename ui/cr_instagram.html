@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #13111C;
+      color: #E8EAED;
+      line-height: 1.5;
+      padding: 16px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .period-selector {
+      display: flex;
+      gap: 8px;
+    }
+
+    .period-btn {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 8px 16px;
+      color: #9CA3AF;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .period-btn.active {
+      background: rgba(193, 53, 132, 0.1);
+      border-color: #C13584;
+      color: #C13584;
+    }
+
+    .stats-overview {
+      background: linear-gradient(145deg, #2D2640 0%, #1F1B29 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: #C13584;
+    }
+
+    .revenue-chart {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .revenue-sources {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .revenue-sources {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .source-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .source-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .source-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      background: rgba(193, 53, 132, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .top-posts {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .posts-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .post-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .post-preview {
+      aspect-ratio: 1;
+      background: #2D2640;
+      position: relative;
+    }
+
+    .post-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      font-size: 13px;
+    }
+
+    .post-stats {
+      display: flex;
+      gap: 12px;
+    }
+
+    .post-info {
+      padding: 12px;
+    }
+
+    .post-earnings {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .trend-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .trend-up {
+      color: #10B981;
+    }
+
+    .trend-down {
+      color: #EF4444;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="page-title">인스타그램 수익 분석</div>
+    <div class="period-selector">
+      <button class="period-btn">주간</button>
+      <button class="period-btn active">월간</button>
+      <button class="period-btn">연간</button>
+    </div>
+  </div>
+
+  <div class="stats-overview">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">이번달 예상 수익</div>
+        <div class="stat-value">₩5,850,000</div>
+        <div class="trend-indicator trend-up">▲ 15.2%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">지난달 총 수익</div>
+        <div class="stat-value">₩5,080,000</div>
+        <div class="trend-indicator trend-up">▲ 8.5%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">팔로워</div>
+        <div class="stat-value">458.2K</div>
+        <div class="trend-indicator trend-up">▲ 2.8%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">평균 인게이지먼트</div>
+        <div class="stat-value">5.8%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="revenue-chart">
+    <div class="chart-header">
+      <h3>일별 수익 추이</h3>
+      <div class="period-selector">
+        <button class="period-btn">7일</button>
+        <button class="period-btn active">30일</button>
+      </div>
+    </div>
+    <svg width="100%" height="300" viewBox="0 0 800 300" style="background: rgba(193, 53, 132, 0.1); border-radius: 12px;">
+      <!-- Grid Lines -->
+      <g stroke="rgba(255,255,255,0.1)" stroke-width="1">
+        <line x1="50" y1="250" x2="750" y2="250" />
+        <line x1="50" y1="200" x2="750" y2="200" />
+        <line x1="50" y1="150" x2="750" y2="150" />
+        <line x1="50" y1="100" x2="750" y2="100" />
+        <line x1="50" y1="50" x2="750" y2="50" />
+      </g>
+
+      <!-- Y Axis Labels -->
+      <g fill="#9CA3AF" font-size="12">
+        <text x="10" y="255">0</text>
+        <text x="10" y="205">50K</text>
+        <text x="10" y="155">100K</text>
+        <text x="10" y="105">150K</text>
+        <text x="10" y="55">200K</text>
+      </g>
+
+      <!-- X Axis Labels -->
+      <g fill="#9CA3AF" font-size="12" text-anchor="middle">
+        <text x="50" y="270">1일</text>
+        <text x="190" y="270">8일</text>
+        <text x="330" y="270">15일</text>
+        <text x="470" y="270">22일</text>
+        <text x="610" y="270">29일</text>
+        <text x="750" y="270">30일</text>
+      </g>
+
+      <!-- Revenue Line -->
+      <path d="M50,200 L120,180 L190,220 L260,160 L330,140 L400,170 L470,120 L540,90 L610,110 L680,80 L750,100" 
+            fill="none" 
+            stroke="#C13584" 
+            stroke-width="2" />
+
+      <!-- Data Points -->
+      <g fill="#C13584">
+        <circle cx="50" cy="200" r="4" />
+        <circle cx="120" cy="180" r="4" />
+        <circle cx="190" cy="220" r="4" />
+        <circle cx="260" cy="160" r="4" />
+        <circle cx="330" cy="140" r="4" />
+        <circle cx="400" cy="170" r="4" />
+        <circle cx="470" cy="120" r="4" />
+        <circle cx="540" cy="90" r="4" />
+        <circle cx="610" cy="110" r="4" />
+        <circle cx="680" cy="80" r="4" />
+        <circle cx="750" cy="100" r="4" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="revenue-sources">
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-icon">🎯</div>
+        <div class="stat-value">₩2,850,000</div>
+      </div>
+      <div class="stat-label">브랜드 협찬</div>
+      <div class="trend-indicator trend-up">전월 대비 12.5% 증가</div>
+    </div>
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-icon">🔗</div>
+        <div class="stat-value">₩1,580,000</div>
+      </div>
+      <div class="stat-label">제휴 마케팅</div>
+      <div class="trend-indicator trend-up">전월 대비 8.2% 증가</div>
+    </div>
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-icon">💎</div>
+        <div class="stat-value">₩1,420,000</div>
+      </div>
+      <div class="stat-label">디지털 상품</div>
+      <div class="trend-indicator trend-up">전월 대비 15.8% 증가</div>
+    </div>
+  </div>
+
+  <div class="top-posts">
+    <h3>수익 TOP 게시물</h3>
+    <div class="posts-grid">
+      <div class="post-card">
+        <div class="post-preview">
+          <div class="post-overlay">
+            <div class="post-stats">
+              <span>❤️ 28.5K</span>
+              <span>💬 1.2K</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-info">
+          <div>새로운 스킨케어 루틴 공개! #스킨케어</div>
+          <div class="post-earnings">
+            <span style="color: #9CA3AF">수익</span>
+            <span style="color: #C13584; font-weight: 600">₩1,250,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-card">
+        <div class="post-preview">
+          <div class="post-overlay">
+            <div class="post-stats">
+              <span>❤️ 25.2K</span>
+              <span>💬 980</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-info">
+          <div>오늘의 OOTD 💫 #데일리룩</div>
+          <div class="post-earnings">
+            <span style="color: #9CA3AF">수익</span>
+            <span style="color: #C13584; font-weight: 600">₩980,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-card">
+        <div class="post-preview">
+          <div class="post-overlay">
+            <div class="post-stats">
+              <span>❤️ 22.8K</span>
+              <span>💬ㅤ850</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-info">
+          <div>홈카페 즐기기 ☕️ #카페스타그램</div>
+          <div class="post-earnings">
+            <span style="color: #9CA3AF">수익</span>
+            <span style="color: #C13584; font-weight: 600">₩850,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
