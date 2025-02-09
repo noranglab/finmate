@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #13111C;
+      color: #E8EAED;
+      line-height: 1.5;
+      padding: 16px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .new-contract-btn {
+      background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .overview-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+    }
+
+    .overview-card {
+      background: linear-gradient(145deg, #2D2640 0%, #1F1B29 100%);
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .overview-card {
+        padding: 20px;
+      }
+    }
+
+    .card-label {
+      font-size: 12px;
+      color: #9CA3AF;
+      margin-bottom: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .card-label {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+    }
+
+    .card-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #22C55E;
+      line-height: 1.2;
+    }
+
+    @media (min-width: 768px) {
+      .card-value {
+        font-size: 24px;
+      }
+    }
+
+    .sub-value {
+      font-size: 11px;
+      color: #9CA3AF;
+      margin-top: 2px;
+    }
+
+    @media (min-width: 768px) {
+      .sub-value {
+        font-size: 14px;
+        margin-top: 4px;
+      }
+    }
+
+    .contracts-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .view-all-link {
+      color: #9CA3AF;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .contract-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contract-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .contract-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .contract-title {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .contract-status {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .status-draft {
+      background: rgba(148, 163, 184, 0.1);
+      color: #94A3B8;
+    }
+
+    .status-pending {
+      background: rgba(251, 191, 36, 0.1);
+      color: #FBB724;
+    }
+
+    .status-active {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22C55E;
+    }
+
+    .contract-details {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .contract-details {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+      }
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .detail-label {
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .contract-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .action-btn {
+      flex: 1;
+      min-width: 45%;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9CA3AF;
+      text-align: center;
+    }
+
+    .action-btn:hover {
+      border-color: #22C55E;
+      color: #22C55E;
+    }
+
+    .action-btn.primary {
+      background: rgba(34, 197, 94, 0.1);
+      border-color: #22C55E;
+      color: #22C55E;
+    }
+
+    .tax-summary {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .tax-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .tax-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+
+    .tax-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    .badge-urgent {
+      background: rgba(239, 68, 68, 0.1);
+      color: #EF4444;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="page-title">B 식품 광고 계약</div>
+    <button class="new-contract-btn">
+      + 새 계약서 작성
+    </button>
+  </div>
+
+  <div class="overview-grid">
+    <div class="overview-card">
+      <div class="card-label">이번달 예상 수익</div>
+      <div class="card-value">₩18,500,000</div>
+      <div class="sub-value">전월 대비 +22.4%</div>
+    </div>
+    <div class="overview-card">
+      <div class="card-label">진행중인 계약</div>
+      <div class="card-value">5</div>
+      <div class="sub-value">총 1.2억원 규모</div>
+    </div>
+    <div class="overview-card">
+      <div class="card-label">이번달 세금계산서</div>
+      <div class="card-value">₩1,850,000</div>
+      <div class="sub-value">4건 발행 필요</div>
+    </div>
+    <div class="overview-card">
+      <div class="card-label">예상 원천징수액</div>
+      <div class="card-value">₩610,500</div>
+      <div class="sub-value">3.3% 적용</div>
+    </div>
+  </div>
+
+  <div class="contracts-section">
+    <div class="section-header">
+      <h3>계약 현황</h3>
+      <a href="#" class="view-all-link">전체보기 ›</a>
+    </div>
+    <div class="contract-list">
+      <div class="contract-card">
+        <div class="contract-header">
+          <div>
+            <div class="contract-title">B 식품 신제품 브랜디드 콘텐츠</div>
+            <div style="font-size: 14px; color: #9CA3AF;">계약번호: -</div>
+          </div>
+          <span class="contract-status status-draft">계약서 미생성</span>
+        </div>
+        <div class="contract-details">
+          <div class="detail-item">
+            <span class="detail-label">계약금액</span>
+            <span class="detail-value">₩42,000,000</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">계약기간</span>
+            <span class="detail-value">2024.03.01 - 2024.05.31</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">계약상태</span>
+            <span class="detail-value">계약서 템플릿 생성 필요</span>
+          </div>
+        </div>
+        <div class="contract-actions">
+          <button class="action-btn">상세 정보</button>
+          <button class="action-btn primary">계약서 생성하기</button>
+        </div>
+      </div>
+
+      <div class="contract-card">
+        <div class="contract-header">
+          <div>
+            <div class="contract-title">B 식품 봄 시즌 유튜브 캠페인</div>
+            <div style="font-size: 14px; color: #9CA3AF;">계약번호: CT2024-0058</div>
+          </div>
+          <span class="contract-status status-pending">서명 대기중</span>
+        </div>
+        <div class="contract-details">
+          <div class="detail-item">
+            <span class="detail-label">계약금액</span>
+            <span class="detail-value">₩35,000,000</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">계약기간</span>
+            <span class="detail-value">2024.02.15 - 2024.04.15</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">계약상태</span>
+            <span class="detail-value">상대방 서명 대기중</span>
+          </div>
+        </div>
+        <div class="contract-actions">
+          <button class="action-btn">계약서 보기</button>
+          <button class="action-btn">서명 링크 복사</button>
+          <button class="action-btn primary">알림 보내기</button>
+        </div>
+      </div>
+
+      <div class="contract-card">
+        <div class="contract-header">
+          <div>
+            <div class="contract-title">B 식품 간편식 리뷰 캠페인</div>
+            <div style="font-size: 14px; color: #9CA3AF;">계약번호: CT2024-0052</div>
+          </div>
+          <span class="contract-status status-active">진행중</span>
+        </div>
+        <div class="contract-details">
+          <div class="detail-item">
+            <span class="detail-label">계약금액</span>
+            <span class="detail-value">₩28,000,000</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">계약기간</span>
+            <span class="detail-value">2024.02.01 - 2024.03.31</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">다음 일정</span>
+            <span class="detail-value">2차 콘텐츠 제출 (D-3)</span>
+          </div>
+        </div>
+        <div class="contract-actions">
+          <button class="action-btn">계약서 보기</button>
+          <button class="action-btn">세금계산서 발행</button>
+          <button class="action-btn primary">정산 요청</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tax-summary">
+    <div class="section-header">
+      <h3>세금 · 정산 현황</h3>
+    </div>
+    <div class="tax-grid">
+      <div class="tax-card">
+        <div class="card-label">2월 세금계산서 발행 필요</div>
+        <div class="card-value">₩1,850,000</div>
+        <div class="contract-actions">
+          <button class="action-btn">발행내역 보기</button>
+          <button class="action-btn primary">세금계산서 발행</button>
+        </div>
+      </div>
+      <div class="tax-card">
+        <div class="card-label">2월 원천징수 납부 <span class="badge badge-urgent">D-5</span></div>
+        <div class="card-value">₩610,500</div>
+        <div class="contract-actions">
+          <button class="action-btn">납부내역 보기</button>
+          <button class="action-btn primary">납부하기</button>
+        </div>
+      </div>
+      <div class="tax-card">
+        <div class="card-label">2월 정산 현황</div>
+        <div style="margin: 12px 0;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="color: #9CA3AF;">총 계약금액</span>
+            <span>₩120,000,000</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="color: #9CA3AF;">정산 완료</span>
+            <span>₩65,000,000</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="color: #9CA3AF;">정산 예정</span>
+            <span>₩55,000,000</span>
+          </div>
+        </div>
+        <div class="contract-actions">
+          <button class="action-btn primary">정산 내역 보기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
