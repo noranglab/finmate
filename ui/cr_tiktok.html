@@ -16,34 +16,67 @@
       background-color: #13111C;
       color: #E8EAED;
       line-height: 1.5;
-      padding: 16px;
+      padding: 12px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 16px;
+      }
     }
 
     .header {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
     }
 
     .page-title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
+    }
+
+    @media (min-width: 768px) {
+      .page-title {
+        font-size: 20px;
+      }
     }
 
     .period-selector {
       display: flex;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .period-btn {
       background: none;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
-      padding: 8px 16px;
+      padding: 6px 12px;
       color: #9CA3AF;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
+      flex: 1;
+      min-width: 60px;
+      max-width: 100px;
+    }
+
+    @media (min-width: 768px) {
+      .period-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        flex: 0 1 auto;
+      }
     }
 
     .period-btn.active {
@@ -55,47 +88,109 @@
     .main-stats {
       background: linear-gradient(145deg, #2D2640 0%, #1F1B29 100%);
       border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 24px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .main-stats {
+        padding: 20px;
+        margin-bottom: 24px;
+      }
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 16px;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .stats-grid {
+        gap: 16px;
+        margin-top: 16px;
+      }
     }
 
     .stat-item {
       background: rgba(255, 255, 255, 0.05);
-      padding: 16px;
+      padding: 12px;
       border-radius: 12px;
     }
 
+    @media (min-width: 768px) {
+      .stat-item {
+        padding: 16px;
+      }
+    }
+
     .stat-label {
-      font-size: 13px;
+      font-size: 12px;
       color: #9CA3AF;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    @media (min-width: 768px) {
+      .stat-label {
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
     }
 
     .stat-value {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
       color: #FF579A;
+    }
+
+    @media (min-width: 768px) {
+      .stat-value {
+        font-size: 20px;
+      }
+    }
+
+    .chart-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .chart-container {
+        padding: 20px;
+        margin-bottom: 24px;
+      }
+    }
+
+    .breakdown-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .breakdown-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
 
     .earnings-breakdown {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 24px;
+      padding: 16px;
+      margin-bottom: 20px;
     }
 
-    .breakdown-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
+    @media (min-width: 768px) {
+      .earnings-breakdown {
+        padding: 20px;
+        margin-bottom: 24px;
+      }
     }
 
     .earnings-list {
@@ -105,11 +200,20 @@
 
     .earnings-item {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 12px;
       background: rgba(255, 255, 255, 0.05);
-      padding: 16px;
+      padding: 12px;
       border-radius: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .earnings-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+      }
     }
 
     .earnings-info {
@@ -119,27 +223,45 @@
     }
 
     .earnings-icon {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       background: rgba(255, 87, 154, 0.1);
-      border-radius: 20px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+      .earnings-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        font-size: 20px;
+      }
     }
 
     .earnings-detail {
-      line-height: 1.4;
+      flex: 1;
+      min-width: 0;
     }
 
     .earnings-type {
       font-weight: 500;
+      font-size: 14px;
     }
 
     .earnings-date {
-      font-size: 13px;
+      font-size: 12px;
       color: #9CA3AF;
+    }
+
+    @media (min-width: 768px) {
+      .earnings-date {
+        font-size: 13px;
+      }
     }
 
     .earnings-amount {
@@ -151,13 +273,28 @@
     .popular-videos {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 16px;
-      padding: 20px;
+      padding: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .popular-videos {
+        padding: 20px;
+      }
     }
 
     .video-grid {
       display: grid;
-      gap: 16px;
-      margin-top: 16px;
+      gap: 12px;
+      margin-top: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .video-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+      }
     }
 
     .video-card {
@@ -167,9 +304,15 @@
     }
 
     .video-preview {
-      aspect-ratio: 9/16;
+      aspect-ratio: 16/9;
       background: #2D2640;
       position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .video-preview {
+        aspect-ratio: 9/16;
+      }
     }
 
     .video-stats {
@@ -180,13 +323,26 @@
       padding: 12px;
       background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
       color: white;
-      font-size: 13px;
+      font-size: 12px;
       display: flex;
       justify-content: space-between;
     }
 
+    @media (min-width: 768px) {
+      .video-stats {
+        font-size: 13px;
+      }
+    }
+
     .video-info {
       padding: 12px;
+      font-size: 13px;
+    }
+
+    @media (min-width: 768px) {
+      .video-info {
+        font-size: 14px;
+      }
     }
 
     .video-earnings {
@@ -198,19 +354,18 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .chart-container {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 24px;
-    }
-
     .trend-indicator {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 13px;
+      font-size: 12px;
       margin-top: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .trend-indicator {
+        font-size: 13px;
+      }
     }
 
     .trend-up {
@@ -221,9 +376,19 @@
       color: #EF4444;
     }
 
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
     @media (min-width: 768px) {
-      .video-grid {
-        grid-template-columns: repeat(3, 1fr);
+      h3 {
+        font-size: 18px;
       }
     }
   </style>
@@ -269,7 +434,7 @@
         <button class="period-btn active">30일</button>
       </div>
     </div>
-    <svg width="100%" height="300" viewBox="0 0 800 300" style="background: rgba(255, 87, 154, 0.1); border-radius: 12px;">
+    <svg width="100%" height="300" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet" style="background: rgba(255, 87, 154, 0.1); border-radius: 12px;">
       <!-- Grid Lines -->
       <g stroke="rgba(255,255,255,0.1)" stroke-width="1">
         <line x1="50" y1="250" x2="750" y2="250" />
