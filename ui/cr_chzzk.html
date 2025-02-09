@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #13111C;
+      color: #E8EAED;
+      line-height: 1.5;
+      padding: 16px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .period-selector {
+      display: flex;
+      gap: 8px;
+    }
+
+    .period-btn {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 8px 16px;
+      color: #9CA3AF;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .period-btn.active {
+      background: rgba(255, 82, 137, 0.1);
+      border-color: #FF5289;
+      color: #FF5289;
+    }
+
+    .main-stats {
+      background: linear-gradient(145deg, #2D2640 0%, #1F1B29 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: #FF5289;
+    }
+
+    .sub-stats {
+      font-size: 14px;
+      color: #9CA3AF;
+      margin-top: 4px;
+    }
+
+    .revenue-chart {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .revenue-breakdown {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .revenue-breakdown {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .revenue-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .revenue-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      background: rgba(255, 82, 137, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .top-streams {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .stream-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .stream-card {
+      display: flex;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .stream-thumbnail {
+      width: 180px;
+      height: 100px;
+      background: #2D2640;
+      border-radius: 8px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .stream-thumbnail {
+        width: 120px;
+        height: 68px;
+      }
+    }
+
+    .stream-duration {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .stream-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .stream-title {
+      font-weight: 500;
+      margin-bottom: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stream-stats {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: #9CA3AF;
+      margin-bottom: 8px;
+    }
+
+    .stream-earnings {
+      color: #FF5289;
+      font-weight: 600;
+    }
+
+    .trend-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .trend-up {
+      color: #10B981;
+    }
+
+    .trend-down {
+      color: #EF4444;
+    }
+
+    .chzzk-badge {
+      background: rgba(255, 82, 137, 0.1);
+      border: 1px solid #FF5289;
+      color: #FF5289;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="page-title">치지직 수익 분석</div>
+    <div class="period-selector">
+      <button class="period-btn">주간</button>
+      <button class="period-btn active">월간</button>
+      <button class="period-btn">연간</button>
+    </div>
+  </div>
+
+  <div class="main-stats">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">이번달 예상 수익</div>
+        <div class="stat-value">₩8,250,000</div>
+        <div class="trend-indicator trend-up">▲ 15.2%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">총 구독자</div>
+        <div class="stat-value">2,840</div>
+        <div class="sub-stats">
+          치즈 2,450 | 슈퍼치즈 390
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">평균 시청자</div>
+        <div class="stat-value">1,850</div>
+        <div class="trend-indicator trend-up">▲ 8.5%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">총 시청 시간</div>
+        <div class="stat-value">285.2K</div>
+        <div class="sub-stats">시간</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="revenue-chart">
+    <div class="chart-header">
+      <h3>일별 수익 추이</h3>
+      <div class="period-selector">
+        <button class="period-btn">7일</button>
+        <button class="period-btn active">30일</button>
+      </div>
+    </div>
+    <svg width="100%" height="300" viewBox="0 0 800 300" style="background: rgba(255, 82, 137, 0.1); border-radius: 12px;">
+      <!-- Grid Lines -->
+      <g stroke="rgba(255,255,255,0.1)" stroke-width="1">
+        <line x1="50" y1="250" x2="750" y2="250" />
+        <line x1="50" y1="200" x2="750" y2="200" />
+        <line x1="50" y1="150" x2="750" y2="150" />
+        <line x1="50" y1="100" x2="750" y2="100" />
+        <line x1="50" y1="50" x2="750" y2="50" />
+      </g>
+
+      <!-- Y Axis Labels -->
+      <g fill="#9CA3AF" font-size="12">
+        <text x="10" y="255">0</text>
+        <text x="10" y="205">100K</text>
+        <text x="10" y="155">200K</text>
+        <text x="10" y="105">300K</text>
+        <text x="10" y="55">400K</text>
+      </g>
+
+      <!-- X Axis Labels -->
+      <g fill="#9CA3AF" font-size="12" text-anchor="middle">
+        <text x="50" y="270">1일</text>
+        <text x="190" y="270">8일</text>
+        <text x="330" y="270">15일</text>
+        <text x="470" y="270">22일</text>
+        <text x="610" y="270">29일</text>
+        <text x="750" y="270">30일</text>
+      </g>
+
+      <!-- Revenue Line -->
+      <path d="M50,200 L120,180 L190,220 L260,160 L330,140 L400,170 L470,120 L540,90 L610,110 L680,80 L750,100" 
+            fill="none" 
+            stroke="#FF5289" 
+            stroke-width="2" />
+
+      <!-- Data Points -->
+      <g fill="#FF5289">
+        <circle cx="50" cy="200" r="4" />
+        <circle cx="120" cy="180" r="4" />
+        <circle cx="190" cy="220" r="4" />
+        <circle cx="260" cy="160" r="4" />
+        <circle cx="330" cy="140" r="4" />
+        <circle cx="400" cy="170" r="4" />
+        <circle cx="470" cy="120" r="4" />
+        <circle cx="540" cy="90" r="4" />
+        <circle cx="610" cy="110" r="4" />
+        <circle cx="680" cy="80" r="4" />
+        <circle cx="750" cy="100" r="4" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="revenue-breakdown">
+    <div class="revenue-card">
+      <div class="revenue-icon">✨</div>
+      <div class="stat-label">구독 수익</div>
+      <div class="stat-value">₩4,250,000</div>
+      <div class="trend-indicator trend-up">전월 대비 12.5% 증가</div>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-icon">🧀</div>
+      <div class="stat-label">치즈</div>
+      <div class="stat-value">₩2,850,000</div>
+      <div class="trend-indicator trend-up">전월 대비 8.2% 증가</div>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-icon">💝</div>
+      <div class="stat-label">후원</div>
+      <div class="stat-value">₩1,150,000</div>
+      <div class="trend-indicator trend-up">전월 대비 15.8% 증가</div>
+    </div>
+  </div>
+
+  <div class="top-streams">
+    <h3>수익 TOP 방송</h3>
+    <div class="stream-list">
+      <div class="stream-card">
+        <div class="stream-thumbnail">
+          <div class="stream-duration">8:45:30</div>
+        </div>
+        <div class="stream-info">
+          <div class="stream-title">신작 게임 첫방! 이번엔 진짜 클리어할거에요 <span class="chzzk-badge">인기</span></div>
+          <div class="stream-stats">
+            <span>👥 평균 2,850명</span>
+            <span>⏱️ 8시간 45분</span>
+          </div>
+          <div class="stream-earnings">₩850,000</div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-thumbnail">
+          <div class="stream-duration">6:20:15</div>
+        </div>
+        <div class="stream-info">
+          <div class="stream-title">24시간 스트리밍 챌린지 1일차</div>
+          <div class="stream-stats">
+            <span>👥 평균 2,420명</span>
+            <span>⏱️ 6시간 20분</span>
+          </div>
+          <div class="stream-earnings">₩720,000</div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-thumbnail">
+          <div class="stream-duration">5:30:45</div>
+        </div>
+        <div class="stream-info">
+          <div class="stream-title">시청자 참여 배틀그라운드! 같이 치킨먹어요</div>
+          <div class="stream-stats">
+            <span>👥 평균 2,180명</span>
+            <span>⏱️ 5시간 30분</span>
+          </div>
+          <div class="stream-earnings">₩580,000</div>
+        </div>
