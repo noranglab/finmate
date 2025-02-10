@@ -451,4 +451,82 @@
         <div class="step-number">5</div>
         <div class="step-content">
           <div class="step-title">약정 체결 및 자금 지원</div>
-          <div class="step-description">약정서 작성 및 자금
+          <div class="step-description">약정서 작성 및 자금 지원</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      구비서류
+    </div>
+    <div class="document-list">
+      <div class="document-item">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <div class="document-name">사업자등록증</div>
+          <div class="document-description">사본 제출</div>
+        </div>
+      </div>
+      <div class="document-item">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <div class="document-name">상시근로자 확인서류</div>
+          <div class="document-description">건강보험자격득실확인서 등</div>
+        </div>
+      </div>
+      <div class="document-item">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <div class="document-name">매출액 증빙서류</div>
+          <div class="document-description">부가가치세과세표준증명, 면세사업자수입금액증명원 등</div>
+        </div>
+      </div>
+      <div class="document-item">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <div class="document-name">사업장 임대차계약서</div>
+          <div class="document-description">임차인 경우 제출</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      문의처
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-label">전화문의</div>
+        <div class="contact-value">1357</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">온라인상담</div>
+        <div class="contact-value">www.semas.or.kr</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">방문상담</div>
+        <div class="contact-value">전국 지역센터</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="apply-button">
+    <button class="outline">관심사업 등록</button>
+    <button onclick="location.href='신청페이지URL'">신청하기</button>
+  </div>
+
+  <script>
+    // 탭 전환 기능
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
