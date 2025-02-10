@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: #1A1D2D;
+      color: #E8EAED;
+      line-height: 1.5;
+      padding: 16px;
+      padding-bottom: 100px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .back-button {
+      color: #9CA3AF;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .hero-section {
+      background: linear-gradient(145deg, #2C3E50 0%, #2D3748 100%);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .category-badge {
+      background: rgba(79, 209, 197, 0.1);
+      color: #4FD1C5;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .program-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .deadline-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .deadline-badge {
+      background: rgba(79, 209, 197, 0.1);
+      color: #4FD1C5;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .deadline-date {
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    .key-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .info-label {
+      color: #9CA3AF;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 16px;
+      font-weight: 500;
+      color: #4FD1C5;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px;
+      border-radius: 12px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      background: #4FD1C5;
+      color: #1A1D2D;
+      font-weight: 500;
+    }
+
+    .content-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .content-text {
+      color: #9CA3AF;
+      font-size: 15px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .requirement-list {
+      list-style: none;
+    }
+
+    .requirement-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .requirement-item:last-child {
+      border-bottom: none;
+    }
+
+    .check-icon {
+      color: #4FD1C5;
+      font-size: 20px;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .step-item {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      background: rgba(79, 209, 197, 0.1);
+      color: #4FD1C5;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .step-description {
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    .document-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .document-item {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .document-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(79, 209, 197, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .document-info {
+      flex: 1;
+    }
+
+    .document-name {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .document-description {
+      color: #9CA3AF;
+      font-size: 13px;
+    }
+
+    .apply-button {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #1A1D2D;
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .apply-button button {
+      flex: 1;
+      background: #4FD1C5;
+      color: #1A1D2D;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .apply-button button.outline {
+      background: transparent;
+      border: 1px solid #4FD1C5;
+      color: #4FD1C5;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .contact-item {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .contact-label {
+      color: #9CA3AF;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .contact-value {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 480px) {
+      .program-title {
+        font-size: 20px;
+      }
+
+      .key-info {
+        grid-template-columns: 1fr;
+      }
+
+      .apply-button {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="javascript:window.history.back()" class="back-button">
+      ←
+    </a>
+    <div class="page-title">지원사업 상세</div>
+    <div style="width: 24px;"></div>
+  </div>
+
+  <div class="hero-section">
+    <div class="category-badge">디지털 전환</div>
+    <h1 class="program-title">디지털 전환 지원사업</h1>
+    <div class="deadline-info">
+      <div class="deadline-badge">신규</div>
+      <div class="deadline-date">신청마감: 2024.03.01</div>
+    </div>
+    <div class="key-info">
+      <div class="info-card">
+        <div class="info-label">지원규모</div>
+        <div class="info-value">최대 400만원</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">자부담</div>
+        <div class="info-value">10%</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">지원분야</div>
+        <div class="info-value">디지털 솔루션</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">선정규모</div>
+        <div class="info-value">1,000개사</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-container">
+    <div class="tab active">사업개요</div>
+    <div class="tab">신청자격</div>
+    <div class="tab">신청절차</div>
+    <div class="tab">구비서류</div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      사업 목적
+    </div>
+    <div class="content-text">
+소상공인의 디지털 경쟁력 강화를 위한 맞춤형 디지털 솔루션 구축을 지원합니다.
+
+주요 지원내용:
+• POS, 키오스크 등 스마트기기 도입
+• 온라인 주문/예약 시스템 구축
+• 매장 관리 솔루션 도입
+• 홈페이지 및 모바일 앱 제작
+• 디지털 마케팅 도구 구축</div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      신청자격 및 요건
+    </div>
+    <ul class="requirement-list">
+      <li class="requirement-item">
+        <div class="check-icon">✓</div>
+        <div>
+          <strong>소상공인 기준 충족</strong><br>
+          상시근로자 5인 미만 사업체 (제조업 등은 10인 미만)
+        </div>
+      </li>
+      <li class="requirement-item">
+        <div class="check-icon">✓</div>
+        <div>
+          <strong>사업자등록 6개월 이상</strong><br>
+          신청일 기준 사업자등록 6개월 이상 경과
+        </div>
+      </li>
+      <li class="requirement-item">
+        <div class="check-icon">✓</div>
+        <div>
+          <strong>연매출 3억원 이하</strong><br>
+          전년도 연매출액이 3억원 이하인 소상공인
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      신청절차
+    </div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">온라인 신청</div>
+          <div class="step-description">홈페이지에서 신청서 작성 및 제출</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step-title">서류 심사</div>
+          <div class="step-description">자격요건 검토 및 사업계획 평가</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <div class="step-title">선정 평가</div>
+          <div class="step-description">현장평가 및 최종 선정</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <div class="step-title">사업 수행</div>
+          <div class="step-description">협약체결 및 사업비 집행</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      구비서류
+    </div>
+    <div class="document-list">
+      <div class="document-item">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <div class="document-name">사업자등록증</div>
+          <div class="document-description">사본 제출</div>
+        </div>
+      </div>
+      <div class="document-item">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <div class="document-name">매출액 증빙서류</div>
+          <div class="document-description">전년도 부가가치세과세표준증명</div>
+        </div>
+      </div>
+      <div class="document-item">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <div class="document-name">디지털 전환 계획서</div>
+          <div class="document-description">지정 양식 작성</div>
+        </div>
+      </div>
+      <div class="document-item">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <div class="document-name">견적서</div>
+          <div class="document-description">도입 예정 솔루션 견적서</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      문의처
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-label">전화문의</div>
+        <div class="contact-value">1357</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">온라인상담</div>
+        <div class="contact-value">www.semas.or.kr</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">방문상담</div>
+        <div class="contact-value">전국 지역센터</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="apply-button">
+    <button class="outline">관심사업 등록</button>
+    <button onclick="location.href='신청페이지URL'">신청하기</button>
+  </div>
+
+  <script>
+    // 탭 전환 기능
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
