@@ -16,7 +16,7 @@
 
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background-color: #1A1D2D;
+      background-color: #111827;
       color: #E8EAED;
       line-height: 1.5;
       padding: 16px;
@@ -30,7 +30,7 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      background-color: #1A1D2D;
+      background-color: #111827;
       margin: -16px -16px 16px -16px;
       padding: 16px;
     }
@@ -47,7 +47,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #4FD1C5;
+      color: #3B82F6;
       text-decoration: none;
       font-size: 24px;
       background: none;
@@ -57,13 +57,8 @@
       margin: -8px;
     }
 
-    .page-title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
     .summary-card {
-      background: linear-gradient(145deg, #2C3E50 0%, #2D3748 100%);
+      background: linear-gradient(145deg, #15203b 0%, #21325d 100%);
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 16px;
@@ -84,7 +79,7 @@
     }
 
     .stat-label {
-      color: #9CA3AF;
+      color: #93C5FD;
       font-size: 13px;
     }
 
@@ -92,7 +87,7 @@
       font-size: 18px;
       font-weight: 600;
       margin-top: 4px;
-      color: #4FD1C5;
+      color: #3B82F6;
     }
 
     .quick-actions {
@@ -122,105 +117,15 @@
 
     .action-label {
       font-size: 12px;
-      color: #9CA3AF;
+      color: #93C5FD;
     }
 
     .calendar-section {
-      background: linear-gradient(145deg, #2C3E50 0%, #2D3748 100%);
+      background: linear-gradient(145deg, #15203b 0%, #21325d 100%);
       border-radius: 16px;
       padding: 16px;
       margin-bottom: 16px;
       overflow: hidden;
-    }
-
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .calendar-nav-btn {
-      min-width: 44px;
-      min-height: 44px;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      border-radius: 8px;
-      color: #E8EAED;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .calendar {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 12px;
-    }
-
-    .calendar-weekdays {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      text-align: center;
-      font-size: 13px;
-      color: #9CA3AF;
-      margin-bottom: 8px;
-    }
-
-    .calendar-weekdays div {
-      min-width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .calendar-days {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-    }
-
-    .calendar-days div {
-      min-width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      cursor: pointer;
-      position: relative;
-      font-size: 13px;
-      touch-action: manipulation;
-    }
-
-    .prev-month, .next-month {
-      color: #4B5563;
-    }
-
-    .has-expense {
-      color: #4FD1C5;
-      font-weight: 500;
-    }
-
-    .has-expense::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 4px;
-      background: #4FD1C5;
-      border-radius: 50%;
-    }
-
-    .calendar-days div.selected {
-      background: rgba(79, 209, 197, 0.2);
-      color: #4FD1C5;
-      font-weight: 600;
     }
 
     .tab-container {
@@ -242,8 +147,8 @@
     }
 
     .tab.active {
-      background: #4FD1C5;
-      color: #1A1D2D;
+      background: #3B82F6;
+      color: #FFFFFF;
       font-weight: 500;
     }
 
@@ -262,14 +167,14 @@
       border-radius: 20px;
       padding: 8px 16px;
       font-size: 13px;
-      color: #9CA3AF;
+      color: #93C5FD;
       white-space: nowrap;
     }
 
     .filter-chip.active {
-      background: rgba(79, 209, 197, 0.2);
-      border-color: #4FD1C5;
-      color: #4FD1C5;
+      background: rgba(59, 130, 246, 0.2);
+      border-color: #3B82F6;
+      color: #3B82F6;
     }
 
     .expense-list {
@@ -301,7 +206,7 @@
     }
 
     .expense-amount {
-      color: #4FD1C5;
+      color: #3B82F6;
       font-weight: 600;
       font-size: 16px;
     }
@@ -320,15 +225,15 @@
     }
 
     .expense-category {
-      background: rgba(79, 209, 197, 0.1);
-      color: #4FD1C5;
+      background: rgba(59, 130, 246, 0.1);
+      color: #3B82F6;
       padding: 4px 12px;
       border-radius: 20px;
       font-size: 12px;
     }
 
     .expense-date {
-      color: #9CA3AF;
+      color: #93C5FD;
       font-size: 12px;
     }
 
@@ -342,7 +247,7 @@
     }
 
     .receipt-filename {
-      color: #9CA3AF;
+      color: #93C5FD;
       font-size: 12px;
       flex: 1;
       white-space: nowrap;
@@ -365,7 +270,7 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: linear-gradient(135deg, #4FD1C5 0%, #2C7A7B 100%);
+      background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
       width: 56px;
       height: 56px;
       border-radius: 28px;
@@ -376,7 +281,7 @@
       color: white;
       border: none;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(79, 209, 197, 0.3);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
       z-index: 100;
     }
 
@@ -394,7 +299,7 @@
     }
 
     .modal-content {
-      background: #1A1D2D;
+      background: #111827;
       border-radius: 20px 20px 0 0;
       padding: 20px;
       width: 100%;
@@ -405,7 +310,7 @@
     .modal-header {
       position: sticky;
       top: 0;
-      background: #1A1D2D;
+      background: #111827;
       padding-bottom: 16px;
       margin-bottom: 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -424,7 +329,7 @@
       min-height: 44px;
       background: none;
       border: none;
-      color: #9CA3AF;
+      color: #93C5FD;
       font-size: 24px;
       cursor: pointer;
       display: flex;
@@ -439,7 +344,7 @@
 
     .form-label {
       display: block;
-      color: #9CA3AF;
+      color: #93C5FD;
       margin-bottom: 8px;
       font-size: 14px;
     }
@@ -458,7 +363,7 @@
 
     .form-input:focus, .form-select:focus {
       outline: none;
-      border-color: #4FD1C5;
+      border-color: #3B82F6;
     }
 
     .upload-area {
@@ -467,7 +372,7 @@
       padding: 20px;
       text-align: center;
       font-size: 14px;
-      color: #9CA3AF;
+      color: #93C5FD;
     }
 
     .upload-icon {
@@ -477,7 +382,7 @@
 
     .submit-button {
       width: 100%;
-      background: #4FD1C5;
+      background: #3B82F6;
       border: none;
       border-radius: 12px;
       padding: 16px;
@@ -502,7 +407,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #9CA3AF;
+      color: #93C5FD;
       font-size: 14px;
     }
   </style>
@@ -563,12 +468,12 @@
       datasets: [{
         label: '일별 지출',
         data: [150000, 480000, 320000, 250000, 400000, 580000, 450000],
-        borderColor: '#4FD1C5',
-        backgroundColor: 'rgba(79, 209, 197, 0.1)',
+        borderColor: '#3B82F6',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
         tension: 0.4,
         fill: true,
-        pointBackgroundColor: '#4FD1C5',
-        pointBorderColor: '#4FD1C5',
+        pointBackgroundColor: '#3B82F6',
+        pointBorderColor: '#3B82F6',
         pointRadius: 4,
         pointHoverRadius: 6
       }]
