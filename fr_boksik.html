@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FinMate - 복식부기 (완성본)</title>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      margin: 0; padding: 16px; font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      background-color: #0A0F1D; color: #E8EAED; line-height: 1.5;
+    }
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 24px; gap: 16px;
+    }
+    .header-title { font-size: clamp(20px, 5vw, 24px); font-weight: 700; flex-shrink: 0; }
+    .header-actions { display: flex; gap: 10px; align-items: center;}
+    .export-btn {
+        background-color: rgba(52, 211, 153, 0.1); color: #34D399;
+        border: 1px solid #34D399; padding: 6px 12px; border-radius: 8px;
+        font-weight: 600; font-size: 14px; cursor: pointer; white-space: nowrap;
+    }
+    .back-link {
+      color: #34D399; text-decoration: none; font-size: 20px; font-weight: 500;
+    }
+    .calendar {
+      background: rgba(255, 255, 255, 0.03); padding: 16px;
+      border-radius: 14px; margin-bottom: 24px;
+    }
+    .calendar-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px;
+    }
+    .calendar-header button {
+        background: none; border: none; color: #E8EAED;
+        font-size: 24px; cursor: pointer;
+    }
+    .calendar-month-year { font-size: clamp(16px, 4.5vw, 18px); font-weight: 600; }
+    .calendar-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 10px; text-align: center;
+    }
+    .calendar-day-name {
+        font-weight: 500; color: #8B8F98;
+        font-size: clamp(12px, 3vw, 14px); margin-bottom: 10px;
+    }
+    .calendar-day {
+      font-weight: 500; padding: 8px 0; border-radius: 8px;
+      font-size: clamp(14px, 3.5vw, 16px); position: relative; cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    .calendar-day.other-month { color: #4A5568; cursor: default; }
+    .calendar-day.today { font-weight: 700; border: 1px solid #34D399; }
+    .calendar-day.has-event::after {
+        content: ''; position: absolute; bottom: 5px; left: 50%;
+        transform: translateX(-50%); width: 5px; height: 5px;
+        background-color: #34D399; border-radius: 50%;
+    }
+    .calendar-day.selected { background-color: #34D399; color: #0A0F1D; border-color: transparent; }
+    .daily-transactions-header {
+        display: flex; align-items: center; gap: 12px;
+        font-size: clamp(16px, 4.5vw, 18px); font-weight: 600;
+        margin-bottom: 16px; border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 24px;
+    }
+    .view-all-link {
+        font-size: clamp(12px, 3.2vw, 14px); font-weight: 500;
+        color: #34D399; cursor: pointer; text-decoration: none;
+    }
+    .transaction-card {
+      background: rgba(255, 255, 255, 0.03); border-radius: 14px;
+      padding: 16px; margin-bottom: 12px;
+    }
+    .transaction-body {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .transaction-accounts { font-size: clamp(14px, 3.5vw, 16px); }
+    .transaction-accounts .account-name { font-weight: 500; }
+    .transaction-accounts .arrow { color: #8B8F98; margin: 0 8px; }
+    .transaction-amount { font-weight: 600; font-size: clamp(16px, 4vw, 18px); }
+    .transaction-description {
+        color: #8B8F98; font-size: clamp(12px, 3.2vw, 14px);
+        margin-top: 8px;
+    }
+    .no-transaction {
+        text-align: center; color: #8B8F98; padding: 40px 0;
+    }
+    .add-transaction-btn {
+        background-color: rgba(52, 211, 153, 0.1);
+        color: #34D399;
+        width: 100%;
+        padding: 12px;
+        border: 1px dashed #34D399;
+        border-radius: 12px;
+        font-size: clamp(14px, 3.8vw, 16px);
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 16px;
+    }
+    
+    /* Modal Styles */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: none; justify-content: center; align-items: center;
+        z-index: 1000;
+    }
+    .modal-content {
+        background: #1E293B; padding: 24px; border-radius: 16px;
+        width: 90%; max-width: 400px;
+    }
+    .modal-header {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 20px;
+    }
+    .modal-title { font-size: 18px; font-weight: 600; }
+    .modal-close { background: none; border: none; color: #8B8F98; font-size: 24px; cursor: pointer; }
+    .modal-body .date-range { display: flex; flex-direction: column; gap: 16px; }
+    .modal-body label { font-weight: 500; color: #8B8F98; }
+    .modal-body input[type="date"] {
+        background: rgba(255, 255, 255, 0.05); border: 1px solid #4A5568;
+        border-radius: 8px; padding: 10px; color: #E8EAED; width: 100%;
+        font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    }
+    .modal-footer { margin-top: 24px; }
+    .modal-export-btn {
+        background-color: #34D399; color: #1A1F2E; width: 100%;
+        padding: 12px; border: none; border-radius: 10px;
+        font-size: 16px; font-weight: 600; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1 class="header-title">복식부기</h1>
+    <div class="header-actions">
+      <button id="show-export-modal" class="export-btn">장부 내보내기</button>
+      <a href="./finmate_main.html" class="back-link">←</a>
+    </div>
+  </div>
+
+  <div class="calendar">
+    <div class="calendar-header">
+      <button id="prev-month">‹</button>
+      <div class="calendar-month-year" id="month-year"></div>
+      <button id="next-month">›</button>
+    </div>
+    <div class="calendar-grid" id="calendar-grid"></div>
+  </div>
+
+  <div id="daily-transactions">
+    <div id="daily-header" class="daily-transactions-header">
+      <span id="header-title"></span>
+      <a id="view-all" class="view-all-link" style="display: none;">[전체보기]</a>
+    </div>
+    <div id="transaction-list"></div>
+    <div id="add-btn-container"></div>
+  </div>
+
+  <div id="export-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">장부 내보내기</h2>
+        <button id="modal-close-btn" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="date-range">
+          <div>
+            <label for="start-date">시작일</label>
+            <input type="date" id="start-date">
+          </div>
+          <div>
+            <label for="end-date">종료일</label>
+            <input type="date" id="end-date">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="export-pdf-btn" class="modal-export-btn">PDF로 내보내기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Sample Data (amount is now a number) ---
+    const transactions = {
+      "2025-07-28": [
+        { debit: '비품', credit: '미지급금', amount: 1500000, description: '업무용 노트북 구매' }
+      ],
+      "2025-08-05": [
+        { debit: '소모품비', credit: '보통예금', amount: 55000, description: '사무용품 구매' }
+      ],
+      "2025-08-10": [
+        { debit: '통신비', credit: '보통예금', amount: 89000, description: '인터넷 및 휴대폰 요금' }
+      ],
+      "2025-08-15": [
+        { debit: '보통예금', credit: '외주수익', amount: 3500000, description: 'A사 웹 개발 프로젝트 대금 입금' },
+        { debit: '지급수수료', credit: '보통예금', amount: 1500, description: '계좌 이체 수수료' }
+      ],
+      "2025-08-20": [
+        { debit: '여비교통비', credit: '보통예금', amount: 65000, description: '클라이언트 미팅 택시비 및 식대' }
+      ],
+      "2025-08-25": [
+        { debit: '보통예금', credit: '외주수익', amount: 2200000, description: 'B사 디자인 작업 대금 입금' },
+        { debit: '광고선전비', credit: '보통예금', amount: 150000, description: '온라인 포트폴리오 사이트 광고 집행' }
+      ]
+    };
+
+    const dom = {
+      monthYear: document.getElementById('month-year'),
+      calendarGrid: document.getElementById('calendar-grid'),
+      prevBtn: document.getElementById('prev-month'),
+      nextBtn: document.getElementById('next-month'),
+      transactionList: document.getElementById('transaction-list'),
+      headerTitle: document.getElementById('header-title'),
+      viewAllBtn: document.getElementById('view-all'),
+      addBtnContainer: document.getElementById('add-btn-container'),
+      showExportModalBtn: document.getElementById('show-export-modal'),
+      exportModal: document.getElementById('export-modal'),
+      modalCloseBtn: document.getElementById('modal-close-btn'),
+      exportPdfBtn: document.getElementById('export-pdf-btn'),
+      startDateInput: document.getElementById('start-date'),
+      endDateInput: document.getElementById('end-date')
+    };
+
+    let currentDate = new Date();
+
+    const renderCalendar = () => {
+      currentDate.setDate(1);
+      const month = currentDate.getMonth();
+      const year = currentDate.getFullYear();
+      const today = new Date();
+      
+      dom.monthYear.textContent = `${year}년 ${month + 1}월`;
+      dom.calendarGrid.innerHTML = "";
+      
+      const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+      dayNames.forEach(name => {
+          const dayNameCell = document.createElement('div');
+          dayNameCell.className = 'calendar-day-name';
+          dayNameCell.textContent = name;
+          dom.calendarGrid.appendChild(dayNameCell);
+      });
+
+      const firstDayOfMonth = new Date(year, month, 1).getDay();
+      const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
+      const lastDateOfLastMonth = new Date(year, month, 0).getDate();
+
+      for (let i = firstDayOfMonth; i > 0; i--) {
+        const dayCell = document.createElement('div');
+        dayCell.className = 'calendar-day other-month';
+        dayCell.textContent = lastDateOfLastMonth - i + 1;
+        dom.calendarGrid.appendChild(dayCell);
+      }
+
+      for (let i = 1; i <= lastDateOfMonth; i++) {
+        const dayCell = document.createElement('div');
+        dayCell.className = 'calendar-day';
+        dayCell.textContent = i;
+        if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
+            dayCell.classList.add('today');
+        }
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+        if (transactions[dateStr]) {
+            dayCell.classList.add('has-event');
+        }
+        dayCell.addEventListener('click', () => showTransactionsForDate(year, month, i));
+        dom.calendarGrid.appendChild(dayCell);
+      }
+    };
+
+    const createTransactionCard = (tx) => {
+        return `
+            <div class="transaction-card">
+              <div class="transaction-body">
+                <div class="transaction-accounts">
+                  <span class="account-name">${tx.debit}</span>
+                  <span class="arrow">→</span>
+                  <span class="account-name">${tx.credit}</span>
+                </div>
+                <span class="transaction-amount">₩${tx.amount.toLocaleString()}</span>
+              </div>
+              <p class="transaction-description">${tx.description}</p>
+            </div>
+        `;
+    };
+    
+    const showAllMonthTransactions = () => {
+        const month = currentDate.getMonth();
+        const year = currentDate.getFullYear();
+        dom.headerTitle.textContent = `${month + 1}월 전체 기록`;
+        dom.viewAllBtn.style.display = 'none';
+        dom.addBtnContainer.innerHTML = '';
+        document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
+        
+        dom.transactionList.innerHTML = '';
+        const monthStr = `${year}-${String(month + 1).padStart(2, '0')}`;
+        const monthlyTransactions = Object.keys(transactions)
+            .filter(date => date.startsWith(monthStr))
+            .sort();
+
+        if (monthlyTransactions.length > 0) {
+            monthlyTransactions.forEach(dateStr => {
+                const day = parseInt(dateStr.split('-')[2], 10);
+                dom.transactionList.innerHTML += `<h3 style="color:#8B8F98; font-weight:500; margin: 16px 0 8px 4px;">${day}일</h3>`;
+                const txCards = transactions[dateStr].map(createTransactionCard).join('');
+                dom.transactionList.innerHTML += txCards;
+            });
+        } else {
+            dom.transactionList.innerHTML = '<p class="no-transaction">해당 월에 거래 기록이 없습니다.</p>';
+        }
+    };
+    
+    const showTransactionsForDate = (year, month, day) => {
+        document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+        const dayElements = document.querySelectorAll('.calendar-day:not(.other-month)');
+        if(dayElements[day-1]) dayElements[day-1].classList.add('selected');
+
+        dom.headerTitle.textContent = `${month + 1}월 ${day}일 거래 기록`;
+        dom.viewAllBtn.style.display = 'inline';
+        
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dailyData = transactions[dateStr];
+
+        if (dailyData && dailyData.length > 0) {
+            dom.transactionList.innerHTML = dailyData.map(createTransactionCard).join('');
+        } else {
+            dom.transactionList.innerHTML = '<p class="no-transaction">해당 날짜에 거래 기록이 없습니다.</p>';
+        }
+
+        dom.addBtnContainer.innerHTML = `<button class="add-transaction-btn">+ 이 날짜에 거래 추가</button>`;
+    };
+
+    const toggleModal = (show) => {
+        dom.exportModal.style.display = show ? 'flex' : 'none';
+    };
+
+    dom.showExportModalBtn.addEventListener('click', () => {
+        const now = new Date();
+        const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+        const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+        dom.startDateInput.value = firstDay.toISOString().split('T')[0];
+        dom.endDateInput.value = lastDay.toISOString().split('T')[0];
+        toggleModal(true);
+    });
+
+    dom.modalCloseBtn.addEventListener('click', () => toggleModal(false));
+    dom.exportModal.addEventListener('click', (e) => e.target === dom.exportModal && toggleModal(false));
+    
+    dom.exportPdfBtn.addEventListener('click', () => {
+        const startDate = dom.startDateInput.value;
+        const endDate = dom.endDateInput.value;
+        if (!startDate || !endDate) {
+            alert('시작일과 종료일을 모두 선택해주세요.');
+            return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // 한글 지원을 위해 Noto Sans KR 폰트가 시스템에 설치되어 있어야 최적의 결과가 나옵니다.
+        // 웹폰트를 PDF에 내장하려면 복잡한 과정이 필요하므로, 여기서는 시스템 폰트 사용을 가정합니다.
+        doc.setFont('NotoSansKR', 'normal'); 
+
+        doc.setFontSize(20);
+        doc.text('거래 장부 보고서', 105, 20, { align: 'center' });
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+        doc.text(`기간: ${startDate} ~ ${endDate}`, 105, 28, { align: 'center' });
+
+        const tableBody = [];
+        const incomeCategories = ['외주수익']; // 수익으로 분류할 계정과목
+        let totalIncome = 0;
+        let totalExpense = 0;
+
+        const filteredKeys = Object.keys(transactions)
+            .filter(date => date >= startDate && date <= endDate)
+            .sort();
+
+        filteredKeys.forEach(date => {
+            transactions[date].forEach(tx => {
+                const isIncome = incomeCategories.includes(tx.credit);
+                if (isIncome) {
+                    totalIncome += tx.amount;
+                } else {
+                    totalExpense += tx.amount;
+                }
+                tableBody.push([
+                    date,
+                    tx.debit,
+                    tx.credit,
+                    tx.description,
+                    `${isIncome ? '+' : '-'} ${tx.amount.toLocaleString()} 원`
+                ]);
+            });
+        });
+
+        doc.autoTable({
+            head: [['날짜', '차변 (자산↑, 비용↑)', '대변 (수익↑, 부채↑)', '거래 내용', '금액']],
+            body: tableBody,
+            startY: 38,
+            headStyles: {
+                fillColor: [30, 41, 59], // #1E293B
+                textColor: [232, 234, 237], // #E8EAED
+                fontStyle: 'bold'
+            },
+            styles: {
+                font: 'NotoSansKR', // 시스템에 폰트가 없을 경우 기본 폰트로 대체됩니다.
+                halign: 'center'
+            },
+            columnStyles: {
+                3: { halign: 'left' },
+                4: { halign: 'right' }
+            }
+        });
+
+        const finalY = doc.lastAutoTable.finalY || 60;
+        doc.autoTable({
+            startY: finalY + 10,
+            head: [['항목', '금액']],
+            body: [
+                ['총 수입', `${totalIncome.toLocaleString()} 원`],
+                ['총 비용', `${totalExpense.toLocaleString()} 원`],
+                ['합계', `${(totalIncome - totalExpense).toLocaleString()} 원`],
+            ],
+            theme: 'grid',
+            headStyles: { fillColor: [52, 211, 153], textColor: [10, 15, 29] },
+            bodyStyles: { fontStyle: 'bold' },
+            columnStyles: { 1: { halign: 'right' }}
+        });
+
+        doc.save(`Finmate_보고서_${startDate}_${endDate}.pdf`);
+        toggleModal(false);
+    });
+
+    dom.prevBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); showAllMonthTransactions(); });
+    dom.nextBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); showAllMonthTransactions(); });
+    dom.viewAllBtn.addEventListener('click', showAllMonthTransactions);
+
+    renderCalendar();
+    showAllMonthTransactions();
+  </script>
+</body>
+</html>
