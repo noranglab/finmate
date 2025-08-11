@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>답변 생성 중...</title>
+    <meta http-equiv="refresh" content="3;url=fr_chat_result.html">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* 아이템을 세로로 정렬 */
+            height: 100vh;
+            margin: 0;
+            background-color: #0A0F1D;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-left-color: #34D399; /* 메인 테마 색상 */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            color: #8B8F98; /* 은은한 텍스트 색상 */
+            margin-top: 24px; /* 스피너와의 간격 */
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+            /* 텍스트에 부드러운 애니메이션 효과 추가 */
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="spinner"></div>
+    <div class="loading-text">Finmate 답변 생성 중...</div>
+</body>
+</html>
