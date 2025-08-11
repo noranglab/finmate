@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FINMATE - 경력 관리</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      margin: 0; padding: 16px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0A0F1D; color: #E8EAED; line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    /* --- Header --- */
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .header a { font-size: 24px; color: #E8EAED; text-decoration: none; }
+    .header-title { font-size: clamp(20px, 5vw, 22px); font-weight: 700; }
+
+    /* --- Profile Card --- */
+    .profile-card {
+      background: linear-gradient(145deg, #1E293B 0%, #1E3A34 100%);
+      border-radius: 16px; padding: 20px; margin-bottom: 32px;
+    }
+    .profile-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+    .profile-name { font-size: clamp(20px, 5vw, 22px); font-weight: 700; }
+    .profile-subtitle { color: #8B8F98; font-size: clamp(14px, 3.5vw, 16px); }
+    .profile-summary { font-size: clamp(14px, 3.8vw, 16px); color: #E8EAED; margin-bottom: 20px; }
+    .profile-edit-btn {
+      background: rgba(255,255,255,0.1); color: #E8EAED;
+      border: none; border-radius: 8px; padding: 6px 12px;
+      font-size: 14px; font-weight: 500; cursor: pointer;
+    }
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.1); color: #34D399;
+      padding: 6px 12px; border-radius: 20px;
+      font-size: clamp(12px, 3.2vw, 14px); font-weight: 500;
+    }
+    /* --- Profile Edit Fields --- */
+    .profile-edit-fields input, .profile-edit-fields textarea {
+      width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 10px; color: #E8EAED; font-family: inherit; font-size: 16px; margin-bottom: 12px;
+    }
+    .profile-edit-fields textarea { resize: vertical; min-height: 80px; }
+    .hidden { display: none; }
+
+    /* --- Filter Section --- */
+    .section-title { font-size: clamp(16px, 4.5vw, 18px); font-weight: 600; margin-bottom: 16px; }
+    .filter-section { margin-bottom: 24px; }
+    .filter-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #8B8F98; padding: 8px 14px; border-radius: 8px;
+      font-size: clamp(13px, 3.5vw, 14px); font-weight: 500; cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .filter-btn.active {
+      background-color: #34D399; color: #0A0F1D; border-color: #34D399;
+    }
+    .date-range-filter { display: none; gap: 10px; align-items: center; margin-top: 12px; }
+    .date-range-filter input {
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #E8EAED; padding: 8px; border-radius: 8px; font-family: inherit; width: 100%;
+    }
+
+    /* --- Career Card --- */
+    .career-card {
+      background: rgba(255, 255, 255, 0.03); border-radius: 14px;
+      padding: 16px; margin-bottom: 16px; display: block;
+    }
+    .career-card.hidden { display: none; }
+    .career-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .career-icon {
+      width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;
+    }
+    .career-title h3 { margin: 0; font-size: clamp(16px, 4.2vw, 18px); font-weight: 600; }
+    .career-title p { margin: 4px 0 0 0; color: #8B8F98; font-size: clamp(12px, 3.2vw, 14px); }
+    .career-details { padding-left: 4px; border-left: 2px solid #34D399; }
+    .detail-item { margin-bottom: 16px; }
+    .detail-item:last-child { margin-bottom: 0; }
+    .detail-label { font-weight: 600; color: #E8EAED; margin-bottom: 6px; font-size: clamp(14px, 3.8vw, 16px); }
+    .detail-content { color: #8B8F98; font-size: clamp(14px, 3.5vw, 16px); }
+    .detail-content ul { list-style: none; padding-left: 0; }
+    .detail-content li::before { content: '- '; }
+    .tech-stack-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.05); color: #8B8F98;
+      padding: 4px 10px; border-radius: 8px;
+      font-size: clamp(12px, 3vw, 13px); font-weight: 500;
+    }
+
+    /* --- Bottom Download Button --- */
+    .download-button-bottom {
+      position: fixed; bottom: 16px; left: 16px; right: 16px;
+      background-color: #34D399; color: #0A0F1D;
+      text-align: center; padding: 14px; border-radius: 12px;
+      font-size: clamp(16px, 4.5vw, 18px); font-weight: 700;
+      text-decoration: none; box-shadow: 0 4px 20px rgba(52, 211, 153, 0.3);
+      cursor: pointer; border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="inedx2.html">←</a>
+    <div class="header-title">경력 프로필</div>
+    <div></div>
+  </div>
+
+  <div class="profile-card">
+    <div class="profile-header">
+      <div id="profile-info-display">
+        <div class="profile-name" id="profile-name-text">홍길동</div>
+        <div class="profile-subtitle" id="profile-subtitle-text">프론트엔드 개발자 / UI/UX 디자이너</div>
+      </div>
+      <button class="profile-edit-btn" id="profile-edit-btn">수정</button>
+    </div>
+
+    <div id="profile-view">
+        <p class="profile-summary" id="profile-summary-text">
+        5년차 개발자 겸 디자이너입니다. 사용자 중심의 인터페이스를 설계하고, 직관적인 웹 애플리케이션을 만드는 데 강점이 있습니다. 새로운 기술을 배우고 적용하는 것을 즐깁니다.
+        </p>
+        <div class="section-title" style="font-size: 16px; margin-bottom: 12px;">주요 기술 스택</div>
+        <div class="skills-grid" id="skills-display">
+          <div class="skill-tag">JavaScript</div>
+          <div class="skill-tag">React</div>
+          <div class="skill-tag">TypeScript</div>
+          <div class="skill-tag">Node.js</div>
+          <div class="skill-tag">Figma</div>
+          <div class="skill-tag">Next.js</div>
+          <div class="skill-tag">AWS</div>
+        </div>
+    </div>
+    
+    <div id="profile-edit-fields" class="profile-edit-fields hidden">
+        <input type="text" id="profile-name-input">
+        <input type="text" id="profile-subtitle-input">
+        <textarea id="profile-summary-input"></textarea>
+        <label for="skills-input" style="font-size: 16px; font-weight: 600; margin-bottom: 12px; display: block;">주요 기술 스택 (쉼표로 구분)</label>
+        <input type="text" id="skills-input" placeholder="예: React, Node.js, Figma">
+    </div>
+  </div>
+
+  <div class="section-title">프로젝트 수행 이력</div>
+
+  <div class="filter-section">
+    <div class="filter-controls">
+      <button class="filter-btn active" data-filter="all">전체</button>
+      <button class="filter-btn" data-filter="2025">2025</button>
+      <button class="filter-btn" data-filter="2024">2024</button>
+      <button class="filter-btn" data-filter="2023">2023</button>
+      <button class="filter-btn" id="custom-range-btn">기간 설정</button>
+    </div>
+    <div id="quarter-filters" style="display: none;" class="filter-controls"></div>
+    <div class="date-range-filter" id="date-range-filter">
+      <input type="date" id="start-date">
+      <span>~</span>
+      <input type="date" id="end-date">
+    </div>
+  </div>
+
+  <div id="career-list">
+    <div class="career-card" data-start="2025-05-01" data-end="2025-09-15"><div class="career-card-header"><div class="career-icon">🚀</div><div class="career-title"><h3>F사 SaaS 플랫폼 MVP 개발</h3><p>2025-05-01 ~ 2025-09-15</p></div></div><div class="career-details"><div class="detail-item"><div class="detail-label">담당 역할</div><div class="detail-content">풀스택 개발 및 기획 참여</div></div><div class="detail-item"><div class="detail-label">주요 성과</div><div class="detail-content"><ul><li>3개월 만에 핵심 기능 갖춘 MVP 출시</li><li>멀티 테넌시 아키텍처 도입으로 확장성 확보</li><li>Stripe 연동으로 결제 시스템 구축</li></ul></div></div><div class="detail-item"><div class="detail-label">사용 기술</div><div class="tech-stack-grid"><div class="tech-tag">Next.js</div><div class="tech-tag">Supabase</div><div class="tech-tag">TypeScript</div><div class="tech-tag">TailwindCSS</div><div class="tech-tag">Stripe</div></div></div></div></div>
+    <div class="career-card" data-start="2025-03-15" data-end="2025-04-30"><div class="career-card-header"><div class="career-icon">🏆</div><div class="career-title"><h3>D사 브랜드 로고 및 앱 디자인</h3><p>2025-03-15 ~ 2025-04-30</p></div></div><div class="career-details"><div class="detail-item"><div class="detail-label">담당 역할</div><div class="detail-content">UI/UX 디자인</div></div><div class="detail-item"><div class="detail-label">주요 성과</div><div class="detail-content"><ul><li>신규 브랜드 아이덴티티 확립 및 디자인 시스템 구축</li><li>사용자 테스트 기반으로 앱 사용성 25% 개선</li><li>프로토타입 제작을 통해 개발팀과의 협업 효율 증대</li></ul></div></div><div class="detail-item"><div class="detail-label">사용 기술</div><div class="tech-stack-grid"><div class="tech-tag">Figma</div><div class="tech-tag">Adobe Illustrator</div><div class="tech-tag">Protopie</div></div></div></div></div>
+    <div class="career-card" data-start="2024-10-01" data-end="2025-02-28"><div class="career-card-header"><div class="career-icon">🏆</div><div class="career-title"><h3>C사 웹사이트 전체 리뉴얼</h3><p>2024-10-01 ~ 2025-02-28</p></div></div><div class="career-details"><div class="detail-item"><div class="detail-label">담당 역할</div><div class="detail-content">프론트엔드 개발 Lead</div></div><div class="detail-item"><div class="detail-label">주요 성과</div><div class="detail-content"><ul><li>기존 웹사이트 대비 로딩 속도 40% 개선</li><li>모바일 반응형 디자인 적용으로 이탈률 15% 감소</li><li>컴포넌트 기반 아키텍처 설계로 유지보수성 향상</li></ul></div></div><div class="detail-item"><div class="detail-label">사용 기술</div><div class="tech-stack-grid"><div class="tech-tag">React</div><div class="tech-tag">Next.js</div><div class="tech-tag">TypeScript</div><div class="tech-tag">Styled-Components</div><div class="tech-tag">Vercel</div></div></div></div></div>
+    <div class="career-card" data-start="2024-06-01" data-end="2024-08-31"><div class="career-card-header"><div class="career-icon">📊</div><div class="career-title"><h3>B사 데이터 시각화 대시보드 구축</h3><p>2024-06-01 ~ 2024-08-31</p></div></div><div class="career-details"><div class="detail-item"><div class="detail-label">담당 역할</div><div class="detail-content">데이터 시각화 및 프론트엔드 개발</div></div><div class="detail-item"><div class="detail-label">주요 성과</div><div class="detail-content"><ul><li>실시간 데이터 연동으로 현황 파악 용이성 증대</li><li>복잡한 데이터를 차트와 그래프로 표현하여 직관성 향상</li><li>필터링 기능 구현으로 사용자 맞춤형 데이터 조회 가능</li></ul></div></div><div class="detail-item"><div class="detail-label">사용 기술</div><div class="tech-stack-grid"><div class="tech-tag">React</div><div class="tech-tag">D3.js</div><div class="tech-tag">Redux</div><div class="tech-tag">REST API</div></div></div></div></div>
+    <div class="career-card" data-start="2023-05-01" data-end="2023-09-30"><div class="career-card-header"><div class="career-icon">🏆</div><div class="career-title"><h3>E사 정산 자동화 시스템 개발</h3><p>2023-05-01 ~ 2023-09-30</p></div></div><div class="career-details"><div class="detail-item"><div class="detail-label">담당 역할</div><div class="detail-content">풀스택 개발</div></div><div class="detail-item"><div class="detail-label">주요 성과</div><div class="detail-content"><ul><li>월별 정산 작업에 소요되는 시간 80% 단축</li><li>API 기반 데이터 연동으로 수기 입력 오류 제거</li><li>관리자 대시보드 개발로 데이터 시각화 및 모니터링 가능</li></ul></div></div><div class="detail-item"><div class="detail-label">사용 기술</div><div class="tech-stack-grid"><div class="tech-tag">Node.js</div><div class="tech-tag">Express</div><div class="tech-tag">React</div><div class="tech-tag">PostgreSQL</div><div class="tech-tag">AWS</div></div></div></div></div>
+  </div>
+
+  <div style="height: 100px;"></div>
+
+  <button class="download-button-bottom" onclick="alert('경력 프로필을 PDF로 저장합니다.')">
+    PDF로 저장하기
+  </button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Profile Edit Logic ---
+      const editBtn = document.getElementById('profile-edit-btn');
+      const profileView = document.getElementById('profile-view');
+      const editFields = document.getElementById('profile-edit-fields');
+      const nameText = document.getElementById('profile-name-text');
+      const subtitleText = document.getElementById('profile-subtitle-text');
+      const summaryText = document.getElementById('profile-summary-text');
+      const skillsDisplay = document.getElementById('skills-display');
+      const nameInput = document.getElementById('profile-name-input');
+      const subtitleInput = document.getElementById('profile-subtitle-input');
+      const summaryInput = document.getElementById('profile-summary-input');
+      const skillsInput = document.getElementById('skills-input');
+      let isEditMode = false;
+      editBtn.addEventListener('click', () => {
+        isEditMode = !isEditMode;
+        if (isEditMode) {
+          profileView.classList.add('hidden');
+          editFields.classList.remove('hidden');
+          editBtn.textContent = '저장';
+          nameInput.value = nameText.textContent;
+          subtitleInput.value = subtitleText.textContent;
+          summaryInput.value = summaryText.textContent.trim();
+          const skills = Array.from(skillsDisplay.children).map(tag => tag.textContent);
+          skillsInput.value = skills.join(', ');
+        } else {
+          profileView.classList.remove('hidden');
+          editFields.classList.add('hidden');
+          editBtn.textContent = '수정';
+          nameText.textContent = nameInput.value;
+          subtitleText.textContent = subtitleInput.value;
+          summaryText.textContent = summaryInput.value;
+          skillsDisplay.innerHTML = '';
+          const skills = skillsInput.value.split(',').map(s => s.trim()).filter(s => s);
+          skills.forEach(skill => {
+            const skillTag = document.createElement('div');
+            skillTag.className = 'skill-tag';
+            skillTag.textContent = skill;
+            skillsDisplay.appendChild(skillTag);
+          });
+        }
+      });
+      
+      // --- Filter Logic (Improved) ---
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const careerCards = document.querySelectorAll('.career-card');
+      const customRangeBtn = document.getElementById('custom-range-btn');
+      const dateRangeFilter = document.getElementById('date-range-filter');
+      const startDateInput = document.getElementById('start-date');
+      const endDateInput = document.getElementById('end-date');
+      const quarterFiltersContainer = document.getElementById('quarter-filters');
+
+      function setActiveButton(activeBtn) {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        if (activeBtn) activeBtn.classList.add('active');
+      }
+
+      function showAllCards() {
+        careerCards.forEach(card => card.classList.remove('hidden'));
+      }
+
+      function filterProjects() {
+        const activeFilter = document.querySelector('.filter-btn.active');
+        if (!activeFilter) {
+          showAllCards();
+          return;
+        }
+        const filterValue = activeFilter.dataset.filter;
+        dateRangeFilter.style.display = 'none';
+        quarterFiltersContainer.style.display = 'none';
+        quarterFiltersContainer.innerHTML = '';
+
+        if (filterValue === 'all') {
+          showAllCards();
+        } else if (filterValue === 'custom') {
+          dateRangeFilter.style.display = 'flex';
+          filterByDateRange();
+        } else {
+          const year = parseInt(filterValue, 10);
+          showQuarterFilters(year);
+          filterByYear(year);
+        }
+      }
+
+      function filterByYear(year) {
+        careerCards.forEach(card => {
+          const start = new Date(card.dataset.start);
+          const end = new Date(card.dataset.end);
+          if (start.getFullYear() === year || end.getFullYear() === year) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }
+
+      function showQuarterFilters(year) {
+        quarterFiltersContainer.style.display = 'flex';
+        for (let i = 1; i <= 4; i++) {
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.dataset.filter = `${year}-q${i}`;
+          btn.textContent = `${i}분기`;
+          btn.onclick = (e) => {
+            // ✅ IMPROVEMENT: Only manage active state within quarter buttons
+            const currentActive = quarterFiltersContainer.querySelector('.active');
+            if(currentActive) currentActive.classList.remove('active');
+            e.currentTarget.classList.add('active');
+            filterByQuarter(year, i);
+          };
+          quarterFiltersContainer.appendChild(btn);
+        }
+      }
+
+      function filterByQuarter(year, quarter) {
+        const q_start_month = (quarter - 1) * 3;
+        const q_end_month = quarter * 3;
+        const quarterStart = new Date(year, q_start_month, 1);
+        const quarterEnd = new Date(year, q_end_month, 0);
+        quarterEnd.setHours(23,59,59,999);
+        careerCards.forEach(card => {
+          const cardStart = new Date(card.dataset.start);
+          const cardEnd = new Date(card.dataset.end);
+          if (cardStart <= quarterEnd && cardEnd >= quarterStart) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }
+
+      function filterByDateRange() {
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+        if (!startDateInput.value || !endDateInput.value || startDate > endDate) {
+          return;
+        }
+        endDate.setHours(23, 59, 59, 999);
+        careerCards.forEach(card => {
+          const cardStart = new Date(card.dataset.start);
+          const cardEnd = new Date(card.dataset.end);
+          if (cardStart <= endDate && cardEnd >= startDate) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const target = e.currentTarget;
+          if (target.id === 'custom-range-btn') {
+            target.dataset.filter = 'custom';
+          }
+          setActiveButton(target);
+          const currentActiveQuarter = quarterFiltersContainer.querySelector('.active');
+          if (currentActiveQuarter) currentActiveQuarter.classList.remove('active');
+          filterProjects();
+        });
+      });
+      startDateInput.addEventListener('change', filterByDateRange);
+      endDateInput.addEventListener('change', filterByDateRange);
+    });
+  </script>
+
+</body>
+</html>
